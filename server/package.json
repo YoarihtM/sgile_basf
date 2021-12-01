@@ -15,5 +15,12 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "mssql": "^7.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "nodemon": "^2.0.15"
   }
 }
