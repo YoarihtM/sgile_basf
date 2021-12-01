@@ -1,0 +1,78 @@
+.cont-ppal-izq {
+    background-color: #f8f8f8;
+    height: 60rem;
+}
+
+.bg-principal {
+    background: #071EC4;
+}
+
+.bg-second{
+    background: #f8f9fa;
+}
+
+.bg-white-side {
+    margin-top: 12rem;
+}
+
+.login-card {
+    width: 50rem;
+    height: 40rem;
+    margin-top: 7rem;
+    margin-right: 5rem;
+    border-radius: 1rem;
+}
+
+.logo {
+    width: 10rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.bg-img-ppal-scene{
+    width: 50rem;
+    height: 48rem;
+}
+
+.img-usuario {
+    width: 8rem;
+    margin-top: 2rem;
+    border: #f8f9fa;
+    border-style: solid;
+    border-width: .4rem;
+}
+
+.input-box {
+    width: 20rem;
+}
+
+.btn-opcion {
+    color: #f8f9fa;
+}
+
+.btn-opcion:hover {
+    background: #f8f9fa;
+    color: #071EC4;
+}
+
+@media only screen and (max-width: 900px) {
+    [class*="login-card"]{
+        width: 30rem;
+        margin-top: 7rem;
+        margin-right: .2rem;
+        margin-left: 1rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    [class*="bg-img-ppal-scene"]{
+        width: 20rem;
+        height: 40rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="logo"]{
+        width: 90%;
+    }
+}
