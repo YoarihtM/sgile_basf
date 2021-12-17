@@ -1,0 +1,19 @@
+@users = http://localhost:15000/users
+
+GET {{users}}
+
+###
+POST {{users}}
+Content-Type: application/json
+
+{
+    "num_empleado": "00",
+    "nombre": "Yoariht",
+    "ap_paterno": "Macedo",
+    "ap_materno": "Cruz",
+    "departamento": "Entonado",
+    "tipo_usuario": 1,
+    "email": null,
+    "telefono": null,
+    "img_perfil": null
+}
