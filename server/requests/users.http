@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ### Get an user by id
-GET {{users}}/4
+GET {{users}}/000
 
 ### Delete an user by id
-DELETE {{users}}/6
+DELETE {{users}}/000

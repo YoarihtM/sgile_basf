@@ -96,13 +96,13 @@ export const createNewUser = async (req, res) => {
 
 export const getUserById = async (req, res) => {
 
-    const id = req.params;
+    const num_empleado = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool
         .request()
-        .input('id', parseInt(id.id))
+        .input('num_empleado', num_empleado.num_empleado)
         .query(queries.getUserById)
         res.send(result.recordset[0])
 
@@ -116,13 +116,13 @@ export const getUserById = async (req, res) => {
 // -------------------------------------------------------------------------------------------------------
 
 export const deleteUser = async (req, res) => {
-    const id = req.params;
+    const num_empleado = req.params;
 
     try {
         const pool = await getConnection();
         const result = await pool
         .request()
-        .input('id', parseInt(id.id))
+        .input('num_empleado', num_empleado.num_empleado)
         .query(queries.deleteUser);
 
         res.send(result.recordset);
@@ -132,3 +132,20 @@ export const deleteUser = async (req, res) => {
         res.send(error.message);
     }
 }
+
+// -------------------------------------------------------------------------------------------------------
+
+// export const updtUserById = async (req, res) => {
+//     const num_empleado = req.params;
+
+//     try {
+//         const pool = await getConnection();
+//         const result = await pool
+//         .request()
+//         .input('num_empleado', num_empleado.num_empleado)
+//         .query(queries)
+        
+//     } catch (error) {
+        
+//     }
+// }

@@ -4,13 +4,13 @@ import { getUsers, createNewUser, getUserById, deleteUser, updtUserById } from '
 
 const router = Router();
 
-router.get('/users', getUsers);
+router.get('/adicion');
 
-router.post('/users', createNewUser);
+router.post('/adicion');
 
-router.get('/users/:num_empleado', getUserById);
+router.get('/adicion/:id');
 
-router.delete('/users/:num_empleado', deleteUser);
+router.delete('/adicion/:id');
 
 // router.put('/users', updtUserById);
 
