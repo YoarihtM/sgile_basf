@@ -1,19 +1,26 @@
 @users = http://localhost:15000/users
 
+### Get all users
 GET {{users}}
 
-###
+### Add new user
 POST {{users}}
 Content-Type: application/json
 
 {
-    "num_empleado": "00",
-    "nombre": "Yoariht",
-    "ap_paterno": "Macedo",
-    "ap_materno": "Cruz",
+    "num_empleado": "36110011",
+    "nombre": "Lisa Esmeralda",
+    "ap_paterno": "Aviles",
+    "ap_materno": "Olguin",
     "departamento": "Entonado",
-    "tipo_usuario": 1,
-    "email": null,
+    "tipo_usuario": 3,
+    "email": "lisa-esmeralda.aviles@basf.com",
     "telefono": null,
     "img_perfil": null
 }
+
+### Get an user by id
+GET {{users}}/4
+
+### Delete an user by id
+DELETE {{users}}/6
