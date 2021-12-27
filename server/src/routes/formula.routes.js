@@ -1,16 +1,13 @@
 import { Router } from 'express';
 import { runOnChangeOnly } from 'nodemon/lib/config/defaults';
-import { getUsers, createNewUser, getUserById, deleteUser, updtUserById } from '../controllers/users.controller'
+import { getAllFormula, addNewFormula } from '../controllers/formula.controller'
 
 const router = Router();
 
-router.get('/users', getUsers);
+router.get('/formula-all', getAllFormula);
 
-router.post('/users', createNewUser);
+router.post('/formula-new', addNewFormula);
 
-router.get('/users/:num_empleado', getUserById);
-
-router.delete('/users/:num_empleado', deleteUser);
 
 // router.put('/users', updtUserById);
 

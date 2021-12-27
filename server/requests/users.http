@@ -8,14 +8,14 @@ POST {{users}}
 Content-Type: application/json
 
 {
-    "num_empleado": "36110011",
-    "nombre": "Lisa Esmeralda",
-    "ap_paterno": "Aviles",
-    "ap_materno": "Olguin",
-    "departamento": "Entonado",
+    "num_empleado": "09071999",
+    "nombre": "Enrique",
+    "ap_paterno": "Alvarado",
+    "ap_materno": "García",
+    "departamento": "Control de Calidad",
     "tipo_usuario": 3,
-    "email": "lisa-esmeralda.aviles@basf.com",
-    "telefono": null,
+    "email": "quiquealvaradogarcia@hotmail.com",
+    "telefono": "5560257276",
     "img_perfil": null
 }
 

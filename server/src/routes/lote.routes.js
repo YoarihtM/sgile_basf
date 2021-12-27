@@ -1,17 +1,12 @@
 import { Router } from 'express';
-import { runOnChangeOnly } from 'nodemon/lib/config/defaults';
-import { getUsers, createNewUser, getUserById, deleteUser, updtUserById } from '../controllers/users.controller'
+import { getAllBatch, getBatchById, addNewBatch } from '../controllers/lote.controller';
 
 const router = Router();
 
-router.get('/users', getUsers);
+router.get('/batch-all', getAllBatch);
 
-router.post('/users', createNewUser);
+router.get('/batch/:id', getBatchById);
 
-router.get('/users/:num_empleado', getUserById);
-
-router.delete('/users/:num_empleado', deleteUser);
-
-// router.put('/users', updtUserById);
+router.post('/batch-new', addNewBatch);
 
 export default router;

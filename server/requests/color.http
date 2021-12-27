@@ -1,0 +1,15 @@
+@color = http://localhost:15000/color
+
+### Obtener todos los colores
+GET {{color}}
+
+### Insertar nuevo color
+POST {{color}}-new
+Content-Type: application/json
+
+{
+    "cod_sap": "0130",
+    "descripcion": "Rojito uwu",
+    "id_formula": 1,
+    "comentario": "Este es un comentario de prueba donde se va a demostrar si se pueden tener textos largos como comentarios, lorem ipsum jeje"
+}
