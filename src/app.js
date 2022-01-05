@@ -1,5 +1,7 @@
 import express from 'express';
 import config from './config';
+// require('./lib/passport');
+// import passport from 'passport';
 
 import adicionRoutes from './routes/adicion.routes'
 import bitacoraRoutes from './routes/bitacora.routes'
@@ -26,7 +28,9 @@ app.use(express.static(__dirname + '/views/public'));
 
 //middlewares
 app.use(express.json()); // para recibir informacion en json
-app.use(express.urlencoded({extend: false})); // para obtener datos de formularios html
+app.use(express.urlencoded({ extend: false })); // para obtener datos de formularios html
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use(adicionRoutes);
 app.use(bitacoraRoutes);

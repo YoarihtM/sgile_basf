@@ -17,3 +17,18 @@ export const loginRedirect = async (req, res) => {
         res.send(error.message);
     }
 };
+
+export const loginAuth = async (req, res) => {
+    try {
+        const {
+            correo,
+            contrasena
+        } = req.body;
+
+        res.send(req.body);
+
+    } catch (error) {
+        res.error(500);
+        res.send(error.message);
+    }
+};
