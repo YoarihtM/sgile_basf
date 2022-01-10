@@ -2,6 +2,9 @@ import { Passport } from "passport";
 import { Strategy } from "passport-local";
 
 const passport = Passport();
-const strategy = Strategy();
+const LocalStrategy = Strategy();
 
-passport.use('local');
+passport.use('local.signin', new LocalStrategy({
+    usernameField: 'correo',
+    passwordField: 'contrasena'
+}));

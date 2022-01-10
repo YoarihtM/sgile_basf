@@ -25,7 +25,9 @@ export const loginAuth = async (req, res) => {
             contrasena
         } = req.body;
 
-        res.send(req.body);
+        // res.send(req.body);
+
+        res.render('profile');
 
     } catch (error) {
         res.error(500);

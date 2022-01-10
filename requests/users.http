@@ -8,13 +8,14 @@ POST {{users}}
 Content-Type: application/json
 
 {
-    "num_empleado": "09071999",
-    "nombre": "Enrique",
-    "ap_paterno": "Alvarado",
-    "ap_materno": "García",
-    "departamento": "Control de Calidad",
-    "tipo_usuario": 3,
-    "email": "quiquealvaradogarcia@hotmail.com",
+    "num_empleado": "0",
+    "nombre": "Irvin Yoariht",
+    "ap_paterno": "Macedo",
+    "ap_materno": "Cruz",
+    "departamento": "Entonado",
+    "tipo_usuario": 1,
+    "email": "irvin.macedo@partners.basf.com",
+    "contrasena": "",
     "telefono": "5560257276",
     "img_perfil": null
 }

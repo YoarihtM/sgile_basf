@@ -23,20 +23,17 @@ export const createNewUser = async (req, res) => {
         ap_paterno,
         ap_materno,
         departamento,
-        tipo_usuario
+        tipo_usuario,
+        email,
+        contrasena
     } = req.body;
 
     let {
-        email,
         telefono,
         img_perfil
     } = req.body;
 
     console.log(req.body);
-
-    if (email == null || email == undefined) {
-        email = '';
-    }
 
     if (telefono == null || telefono == undefined) {
         telefono = '';
@@ -70,6 +67,7 @@ export const createNewUser = async (req, res) => {
             .input("departamento", sql.VarChar(30), departamento)
             .input("tipo_usuario", sql.Int, tipo_usuario)
             .input("email", sql.VarChar(50), email)
+            .input("contrasena", sql.VarChar(30), contrasena)
             .input("telefono", sql.VarChar(30), telefono)
             .input("img_perfil", sql.Image, img_perfil)
             .query(queries.addNewUser);
@@ -82,6 +80,7 @@ export const createNewUser = async (req, res) => {
             departamento,
             tipo_usuario,
             email,
+            contrasena,
             telefono,
             img_perfil
         })
