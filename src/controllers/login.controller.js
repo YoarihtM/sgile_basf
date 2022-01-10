@@ -1,4 +1,5 @@
 import res from "express/lib/response";
+const passport = require('passport');
 
 export const login = async (req, res) => {
     try {
@@ -20,17 +21,24 @@ export const loginRedirect = async (req, res) => {
 
 export const loginAuth = async (req, res) => {
     try {
-        const {
-            correo,
-            contrasena
-        } = req.body;
 
-        // res.send(req.body);
-
-        res.render('profile');
+        passport.authenticate('local.signin', {
+            successRedirect: '/profile',
+            failureRedirect: '/login',
+            failureFlash: true
+        });
 
     } catch (error) {
         res.error(500);
         res.send(error.message);
+    }
+};
+
+export const profile = async (req, res) => {
+    try {
+        res.render('profile');
+    } catch (error) {
+        res.status(500);
+        res.send(error);
     }
 };

@@ -15,7 +15,7 @@ Content-Type: application/json
     "departamento": "Entonado",
     "tipo_usuario": 1,
     "email": "irvin.macedo@partners.basf.com",
-    "contrasena": "",
+    "contrasena": "Yoariht1",
     "telefono": "5560257276",
     "img_perfil": null
 }
