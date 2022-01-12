@@ -1,37 +1,20 @@
 import res from "express/lib/response";
 const passport = require('passport');
 
-export const login = async (req, res) => {
-    try {
-        res.render('login');
-    } catch (error) {
-        res.error(500);
-        res.send(error.message);
-    }
+export const login = (req, res) => {
+    res.render('login');
 };
 
-export const loginRedirect = async (req, res) => {
-    try {
-        res.redirect('login');
-    } catch (error) {
-        res.error(500);
-        res.send(error.message);
-    }
+export const loginRedirect = (req, res) => {
+    res.redirect('login');
 };
 
-export const loginAuth = async (req, res) => {
-    try {
-
-        passport.authenticate('local.signin', {
+export const loginAuth = (req, res, next) => {
+    passport.authenticate('local.signin', {
             successRedirect: '/profile',
             failureRedirect: '/login',
             failureFlash: true
-        });
-
-    } catch (error) {
-        res.error(500);
-        res.send(error.message);
-    }
+        })(req, res, next);
 };
 
 export const profile = async (req, res) => {

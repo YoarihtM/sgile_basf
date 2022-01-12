@@ -1,7 +1,8 @@
 import express from 'express';
 import config from './config';
-// require('./lib/passport');
-// import passport from 'passport';
+const passport = require('passport');
+require('./lib/passport');
+
 
 import adicionRoutes from './routes/adicion.routes'
 import bitacoraRoutes from './routes/bitacora.routes'
@@ -16,6 +17,7 @@ import pruebaRoutes from './routes/prueba.routes'
 import terminadoRoutes from './routes/terminado.routes'
 import usersRoutes from './routes/users.routes'
 import indexRoutes from './routes/index.routes'
+import morgan from 'morgan';
 
 const app = express();
 const path = require('path');
@@ -27,6 +29,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views/public'));
 
 //middlewares
+app.use(morgan('dev'))
 app.use(express.json()); // para recibir informacion en json
 app.use(express.urlencoded({ extend: false })); // para obtener datos de formularios html
 // app.use(passport.initialize());
