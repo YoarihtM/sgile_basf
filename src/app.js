@@ -1,6 +1,8 @@
 import express from 'express';
 import config from './config';
 const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 require('./lib/passport');
 
 
@@ -29,11 +31,27 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views/public'));
 
 //middlewares
+app.use(session({
+    secret: 'basf-session',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash());
 app.use(morgan('dev'))
 app.use(express.json()); // para recibir informacion en json
 app.use(express.urlencoded({ extend: false })); // para obtener datos de formularios html
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Variables globales
+app.use((req, res, next) => {
+
+    app.locals.success = req.flash('success');
+    app.locals.message = req.flash('message');
+
+
+    next();
+});
 
 app.use(adicionRoutes);
 app.use(bitacoraRoutes);

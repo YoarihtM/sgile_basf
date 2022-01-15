@@ -1,5 +1,6 @@
 import { type } from 'express/lib/response';
 import { getConnection, sql, queries } from '../database'
+import { encryptPassword, matchPassword } from '../lib/helpers';
 
 export const getUsers = async (req, res) => {
     try {
@@ -43,17 +44,7 @@ export const createNewUser = async (req, res) => {
         img_perfil = null;
     }
 
-    console.log(
-        num_empleado,
-        nombre,
-        ap_paterno,
-        ap_materno,
-        departamento,
-        tipo_usuario,
-        email,
-        telefono,
-        img_perfil
-    );
+    const contrasenaCifrada = await encryptPassword(contrasena);
 
     try {
         const pool = await getConnection();
@@ -67,7 +58,7 @@ export const createNewUser = async (req, res) => {
             .input("departamento", sql.VarChar(30), departamento)
             .input("tipo_usuario", sql.Int, tipo_usuario)
             .input("email", sql.VarChar(50), email)
-            .input("contrasena", sql.VarChar(30), contrasena)
+            .input("contrasena", sql.VarChar(100), contrasenaCifrada)
             .input("telefono", sql.VarChar(30), telefono)
             .input("img_perfil", sql.Image, img_perfil)
             .query(queries.addNewUser);
@@ -80,7 +71,7 @@ export const createNewUser = async (req, res) => {
             departamento,
             tipo_usuario,
             email,
-            contrasena,
+            contrasenaCifrada,
             telefono,
             img_perfil
         })

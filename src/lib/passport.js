@@ -1,34 +1,39 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 
+import { getConnection, sql, queries } from '../database'
+import { matchPassword } from '../lib/helpers'
+
+
 passport.use('local.signin', new localStrategy({
     usernameField: 'correo',
     passwordField: 'contrasena',
     passReqToCallback: true
 }, async (req, correo, contrasena, done) => {
 
-    console.log(req.body);
+    const pool = await getConnection();
+    const result = await pool
+    .request()
+    .input('email', correo)
+    .query(queries.checkEmail);
 
-    console.log('Correo:', correo);
-    console.log('Contraseña:', contrasena);
-
+    const user = result.recordset[0]
     
-    // try {
-    //     const pool = await getConnection();
-    //     const result = await pool
-    //     .request()
-    //     .input('email', correo)
-    //     .query(queries.checkEmail)
+    if(result.recordset.length > 0) {
+        console.log(user);
+        const validPassword = await matchPassword(contrasena, user.contrasena);
 
-    //     console.log(result.recordset[0]);
-
-    // } catch (error) {
-    //     res.status(500);
-    //     res.send(error);
-    // }
+        if(validPassword){
+            done(null, user, req.flash('success', 'Bienvenido' + user.nombre));
+        }else{
+            done(null, false, req.flash('message', 'Contraseña incorrecta'));
+        }
+    }else{
+        done(null, false, req.flash('message', 'El usuario no existe'))
+    }
 
 }));
 
-// passport.serializeUser((usr, done) => {
-
-// });
+passport.serializeUser((usr, done) => {
+    done(null, usr.id);
+});
