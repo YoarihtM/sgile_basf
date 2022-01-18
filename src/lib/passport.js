@@ -1,6 +1,7 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 
+import { pool } from 'mssql';
 import { getConnection, sql, queries } from '../database'
 import { matchPassword } from '../lib/helpers'
 
@@ -20,20 +21,33 @@ passport.use('local.signin', new localStrategy({
     const user = result.recordset[0]
     
     if(result.recordset.length > 0) {
-        console.log(user);
         const validPassword = await matchPassword(contrasena, user.contrasena);
 
         if(validPassword){
-            done(null, user, req.flash('success', 'Bienvenido' + user.nombre));
+            done(null, user, req.flash('success', 'Bienvenido ' + user.nombre));
+            // console.log(req.flash('success'));
         }else{
             done(null, false, req.flash('message', 'Contraseña incorrecta'));
+            // console.log(req.flash('message'));
         }
     }else{
         done(null, false, req.flash('message', 'El usuario no existe'))
+        // console.log(req.flash('message'));
     }
 
 }));
 
-passport.serializeUser((usr, done) => {
-    done(null, usr.id);
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+    const pool = await getConnection();
+    const result = await pool
+    .request()
+    .input('id', id)
+    .query(queries.getUserById);
+
+    const finalUser = result.recordset[0];
+    done(null, finalUser);
 });

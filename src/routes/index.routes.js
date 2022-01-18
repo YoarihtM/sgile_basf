@@ -1,14 +1,18 @@
 import { Router } from "express";
-import { login, loginAuth, loginRedirect, profile } from "../controllers/login.controller";
+import { login, loginAuth, loginRedirect, logout, menu } from "../controllers/login.controller";
+import { isLoggedIn, isNotLoggedIn } from "../lib/auth";
+
 
 const router = Router();
 
-router.get('/', loginRedirect);
+router.get('/', isNotLoggedIn, loginRedirect);
 
-router.get('/login', login);
+router.get('/login', isNotLoggedIn, login);
 
-router.post('/login', loginAuth)
+router.post('/login', isNotLoggedIn, loginAuth);
 
-router.get('/profile', profile)
+router.get('/menu', isLoggedIn, menu);
+
+router.get('/logout', logout);
 
 export default router;

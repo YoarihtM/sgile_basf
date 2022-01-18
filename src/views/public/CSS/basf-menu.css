@@ -9,8 +9,13 @@
 }
 
 .middle-row-1 {
-    height: 70%;
-    padding: 5% 0%;
+    height: 30%;
+    padding: 10% 0%;
+}
+
+.middle-row-2 {
+    height: 50%;
+    padding: 8% 0%;
 }
 
 .col-ppal-middle-row {
