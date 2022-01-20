@@ -1,0 +1,25 @@
+<%- include("../public/partials/header") -%>
+
+<% if(user.tipo_usuario == 1){ %>
+    <div class="row my-md-2 middle-row-3">
+        <div class="col-md-6 col-sm-12 d-flex flex-column">
+            <a href="usuarios/crear-administrador" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Administrador</a>
+            <a href="usuarios/crear-moderador" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Moderador</a>
+        </div>
+        <div class="col-md-6 col-sm-12 d-flex flex-column">
+            <a href="usuarios/crear-acceso_limitado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Acceso Restringido</a>
+            <a href="usuarios/crear-solo_vista" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Solo Vista</a>
+        </div>
+    </div>
+<% } else if(user.tipo_usuario == 2){ %>
+    <div class="row my-md-2 middle-row-4">
+        <div class="col-md-6 col-sm-12 d-flex flex-column">
+            <a href="usuarios/crear-acceso_limitado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Acceso Restringido</a>
+        </div>
+        <div class="col-md-6 col-sm-12 d-flex flex-column">
+            <a href="usuarios/crear-solo_vista" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Solo Vista</a>
+        </div>
+    </div>
+<% } %>
+
+<%- include("../public/partials/footer") -%>

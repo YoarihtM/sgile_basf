@@ -13,6 +13,6 @@ router.post('/login', isNotLoggedIn, loginAuth);
 
 router.get('/menu', isLoggedIn, menu);
 
-router.get('/logout', logout);
+router.get('/logout', isLoggedIn, logout);
 
 export default router;

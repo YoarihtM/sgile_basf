@@ -2,6 +2,26 @@ import { type } from 'express/lib/response';
 import { getConnection, sql, queries } from '../database'
 import { encryptPassword, matchPassword } from '../lib/helpers';
 
+export const users = (req, res) => {
+    res.render('users/usuarios');
+};
+
+export const createAdmin = (req, res) => {
+    res.render('users/crearAdmin');
+};
+
+export const createModerador = (req, res) => {
+    res.render('users/crearModerador');
+};
+
+export const createAccLim = (req, res) => {
+    res.render('users/crearAccesoLim');
+};
+
+export const createSoloVista = (req, res) => {
+    res.render('users/crearSoloVista');
+};
+
 export const getUsers = async (req, res) => {
     try {
         const pool = await getConnection();
@@ -15,6 +35,7 @@ export const getUsers = async (req, res) => {
 };
 
 // -------------------------------------------------------------------------------------------------------
+
 
 export const createNewUser = async (req, res) => {
 

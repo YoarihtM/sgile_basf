@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../CSS/Bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/basf-principal.css">
     <link rel="stylesheet" href="../CSS/basf-menu.css">
+    <link rel="stylesheet" href="../CSS/basf-users-form.css">
     <link rel="shortcut icon" href="../img/basf-logo.ico" type="image/x-icon" />
     <title>Menú Principal</title>
 </head>
@@ -17,7 +18,7 @@
     <div class="container-fluid principal-cont">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a href="menu" class="navbar-brand col-3">
+                <a href="/menu" class="navbar-brand col-3">
                     <img src="../img/logo.png" alt="BASF Mexicana" class="logo">
                 </a>
                 <div class="card user-card bg-principal col-9">
@@ -30,7 +31,7 @@
                         <div class="col-md-9 d-flex align-items-center justify-content-center">
                             <% switch(user.tipo_usuario){ 
                                 case 1: %>
-                                <a href="profile" class="user-card-name">
+                                <a href="/profile" class="user-card-name">
                                     Administrador - <%= user.nombre %>
                                 </a>
                             <% break;

@@ -11,10 +11,10 @@ export const loginRedirect = (req, res) => {
 
 export const loginAuth = (req, res, next) => {
     passport.authenticate('local.signin', {
-            successRedirect: '/menu',
-            failureRedirect: '/login',
-            failureFlash: true
-        })(req, res, next);
+        successRedirect: '/menu',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
 };
 
 export const menu = async (req, res) => {
@@ -28,5 +28,5 @@ export const menu = async (req, res) => {
 
 export const logout = async (req, res) => {
     req.logOut();
-    res.redirect('/login')
+    res.redirect('/login');
 };
