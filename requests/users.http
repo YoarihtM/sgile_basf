@@ -4,21 +4,21 @@
 GET {{users}}
 
 ### Add new user
-POST {{users}}
-Content-Type: application/json
+# POST {{users}}
+# Content-Type: application/json
 
-{
-    "num_empleado": "00",
-    "nombre": "Yoariht",
-    "ap_paterno": "Macedo",
-    "ap_materno": "Cruz",
-    "departamento": "Entonado",
-    "tipo_usuario": 4,
-    "email": "imacedoc1600@alumno.ipn.mx",
-    "contrasena": "Yoariht1",
-    "telefono": "5560257276",
-    "img_perfil": null
-}
+# {
+#     "num_empleado": "00",
+#     "nombre": "Yoariht",
+#     "ap_paterno": "Macedo",
+#     "ap_materno": "Cruz",
+#     "departamento": "Entonado",
+#     "tipo_usuario": 4,
+#     "email": "imacedoc1600@alumno.ipn.mx",
+#     "contrasena": "Yoariht1",
+#     "telefono": "5560257276",
+#     "img_perfil": null
+# }
 
 ### Get an user by id
 GET {{users}}/000

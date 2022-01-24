@@ -5,7 +5,6 @@ const flash = require('connect-flash');
 const session = require('express-session');
 require('./lib/passport');
 
-
 import adicionRoutes from './routes/adicion.routes'
 import bitacoraRoutes from './routes/bitacora.routes'
 import calidadRoutes from './routes/calidad.routes'
