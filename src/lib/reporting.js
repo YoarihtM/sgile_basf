@@ -1,8 +1,16 @@
-const reports = {};
-const pdf = require('jspdf');
+import { jsPDF } from 'jspdf';
 
-reports.userCreated = (userInfo) =>{
+export const newUserCreated = (userData) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(12);
+    doc.setFont('times');
+
+    doc.text('Nuevo usuario creado', 70, 20);
+
+    const msj = 'El usuario ' + userData.nombre + ' ' + userData.ap_paterno + ' ' + userData.ap_materno + ' ha sido creado con éxito.';
     
-};
+    doc.text(msj, 10, 30);
 
-module.exports = reports;
+    doc.save('prueba.pdf');
+};

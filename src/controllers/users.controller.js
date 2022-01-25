@@ -1,7 +1,7 @@
 import { type } from 'express/lib/response';
 import { getConnection, sql, queries } from '../database'
 import { createPassword, encryptPassword, matchPassword } from '../lib/helpers';
-import { reports } from '../lib/reporting';
+import { newUserCreated } from '../lib/reporting';
 
 export const users = (req, res) => {
     res.render('users/usuarios');
@@ -65,6 +65,19 @@ export const createNewAdmin = async (req, res) => {
     }
     
     const contrasena = createPassword();
+
+    const report = newUserCreated({
+        num_empleado,
+        nombre,
+        ap_paterno,
+        ap_materno,
+        departamento,
+        tipo_usuario,
+        email,
+        contrasena,
+        telefono,
+        img_perfil
+    });
     
     // const contrasenaCifrada = await encryptPassword(contrasena);
     
