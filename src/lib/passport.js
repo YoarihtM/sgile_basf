@@ -14,23 +14,23 @@ passport.use('local.signin', new localStrategy({
 
     const pool = await getConnection();
     const result = await pool
-    .request()
-    .input('email', correo)
-    .query(queries.checkEmail);
+        .request()
+        .input('email', correo)
+        .query(queries.checkEmail);
 
     const user = result.recordset[0]
-    
-    if(result.recordset.length > 0) {
+
+    if (result.recordset.length > 0) {
         const validPassword = await matchPassword(contrasena, user.contrasena);
 
-        if(validPassword){
+        if (validPassword) {
             done(null, user, req.flash('success', 'Bienvenido ' + user.nombre));
             // console.log(req.flash('success'));
-        }else{
+        } else {
             done(null, false, req.flash('message', 'Contraseña incorrecta'));
             // console.log(req.flash('message'));
         }
-    }else{
+    } else {
         done(null, false, req.flash('message', 'El usuario no existe'))
         // console.log(req.flash('message'));
     }
@@ -44,9 +44,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     const pool = await getConnection();
     const result = await pool
-    .request()
-    .input('id', id)
-    .query(queries.getUserById);
+        .request()
+        .input('id', id)
+        .query(queries.getUserById);
 
     const finalUser = result.recordset[0];
     done(null, finalUser);

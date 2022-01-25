@@ -30,6 +30,10 @@ export const queries = {
     getUserById: 'SELECT * FROM usuario WHERE id = @id',
     getUserByEmployeeNumber: 'SELECT * FROM usuario WHERE num_empleado = @num_empleado',
     deleteUser: 'DELETE FROM usuario WHERE num_empleado = @num_empleado',
-    checkEmail: 'SELECT * FROM usuario WHERE email = @email'
+    checkEmail: 'SELECT * FROM usuario WHERE email = @email',
     // updtUserById: 'UPDATE '
+
+// -------------------------------------------------------------------------------------------------------
+
+    getUserType: 'SELECT nombre FROM tipo_usuario WHERE id = @id'
 };

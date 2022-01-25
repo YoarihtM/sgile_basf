@@ -2,6 +2,9 @@ import { type } from 'express/lib/response';
 import { getConnection, sql, queries } from '../database'
 import { createPassword, encryptPassword, matchPassword } from '../lib/helpers';
 import { newUserCreated } from '../lib/reporting';
+import { FileSaver, saveAs } from 'file-saver';
+import { report } from 'process';
+const fs = require('fs');
 
 export const users = (req, res) => {
     res.render('users/usuarios');
@@ -37,9 +40,13 @@ export const getUsers = async (req, res) => {
 
 // -------------------------------------------------------------------------------------------------------
 
+export const created = (req, res) => {
+    const file = req.session.reporte;
 
+    console.log(file);
+};
 
-export const createNewAdmin = async (req, res) => {
+export const createNewAdmin = async (req, res, done) => {
     const tipo_usuario = 1;
     
     const {
@@ -66,7 +73,7 @@ export const createNewAdmin = async (req, res) => {
     
     const contrasena = createPassword();
 
-    const report = newUserCreated({
+    const report = await newUserCreated({
         num_empleado,
         nombre,
         ap_paterno,
@@ -79,20 +86,10 @@ export const createNewAdmin = async (req, res) => {
         img_perfil
     });
     
-    // const contrasenaCifrada = await encryptPassword(contrasena);
-    
-    res.json({
-        num_empleado,
-        nombre,
-        ap_paterno,
-        ap_materno,
-        departamento,
-        tipo_usuario,
-        email,
-        contrasena,
-        telefono,
-        img_perfil
-    });
+    const contrasenaCifrada = await encryptPassword(contrasena);
+
+    done(null, false, req.flash('reporte', report));
+    res.redirect('/usuarios/creado');
 };
 
 export const createNewModer = async (req, res) => {
