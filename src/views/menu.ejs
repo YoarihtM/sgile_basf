@@ -1,9 +1,22 @@
 <%- include("public/partials/header") -%>
 
+    <% if(success != ''){ %>
+        <div class="container p-4">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        <%= success %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
     <% if(user.tipo_usuario==1){ %>
-        <div class="row my-md-2 middle-row">
+        <div class="row my-md-1 middle-row-2">
             <div class="col-md-6 col-sm-12 d-flex flex-column">
-                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                <a href="/terminado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
                     type="button">Evaluación de Terminado</a>
                 <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
                     type="button">Calidad</a>
@@ -16,64 +29,62 @@
                 <a href="usuarios" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
                     type="button">Nuevo Usuario</a>
                 <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                    type="button">Actualizar Privilegios de Usuario</a>
-                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Nueva
-                    Formula</a>
+                    type="button">Actualizar Datos de Usuario</a>
+                <a href="/formula" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Formula</a>
+                <a href="/lotes" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Consultar Lotes</a>
+            </div>
+        </div>
+    <% } else if(user.tipo_usuario==2){ %>
+        <div class="row my-md-1 middle-row-2">
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="/terminado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Evaluación de Terminado</a>
                 <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Calidad</a>
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Entonado</a>
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Bitácora de Entonado</a>
+            </div>
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="usuarios" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Nuevo Usuario</a>
+                <a href="/formula" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Formula</a>
+                <a href="/lotes" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
                     type="button">Consultar Lotes</a>
             </div>
         </div>
-        <% } else if(user.tipo_usuario==2){ %>
-            <div class="row my-md-2 middle-row-2">
-                <div class="col-md-6 col-sm-12 d-flex flex-column">
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Evaluación de Terminado</a>
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Calidad</a>
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Entonado</a>
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Bitácora de Entonado</a>
-                </div>
-                <div class="col-md-6 col-sm-12 d-flex flex-column">
-                    <a href="usuarios" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Nuevo Usuario</a>
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Nueva Formula</a>
-                    <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                        type="button">Consultar Lotes</a>
-                </div>
+    <% } else if(user.tipo_usuario==3){ %>
+        <div class="row my-md-1 middle-row-2">
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="/terminado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Evaluación de Terminado</a>
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Calidad</a>
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Entonado</a>
             </div>
-            <% } else if(user.tipo_usuario==3){ %>
-                <div class="row my-md-1 middle-row-2">
-                    <div class="col-md-6 col-sm-12 d-flex flex-column">
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Evaluación de Terminado</a>
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Calidad</a>
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Entonado</a>
-                    </div>
-                    <div class="col-md-6 col-sm-12 d-flex flex-column">
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Bitácora de Entonado</a>
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Nueva Formula</a>
-                        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                            type="button">Consultar Lotes</a>
-                    </div>
-                </div>
-                <% } else if(user.tipo_usuario==4){ %>
-                    <div class="row my-md-2 middle-row-1">
-                        <div class="col-md-6 col-sm-12 d-flex flex-column">
-                            <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                                type="button">Bitácora de Entonado</a>
-                        </div>
-                        <div class="col-md-6 col-sm-12 d-flex flex-column">
-                            <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
-                                type="button">Consultar Lotes</a>
-                        </div>
-                    </div>
-                    <% } %>
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Bitácora de Entonado</a>
+                <a href="/formula" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Formula</a>
+                <a href="/lotes" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Consultar Lotes</a>
+            </div>
+        </div>
+    <% } else if(user.tipo_usuario==4){ %>
+        <div class="row my-md-1 middle-row-1">
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Bitácora de Entonado</a>
+            </div>
+            <div class="col-md-6 col-sm-12 d-flex flex-column">
+                <a href="/lotes" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+                    type="button">Consultar Lotes</a>
+            </div>
+        </div>
+    <% } %>
 
-                        <%- include("public/partials/footer-menu") -%>
+<%- include("public/partials/footer-menu") -%>

@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import { runOnChangeOnly } from 'nodemon/lib/config/defaults';
-import { getAllFormula, addNewFormula } from '../controllers/formula.controller'
+import { formula } from '../controllers/formula.controller'
+import { isLoggedIn } from '../lib/auth';
 
 const router = Router();
 
-router.get('/formula-all', getAllFormula);
-
-router.post('/formula-new', addNewFormula);
+router.get('/formula', isLoggedIn, formula);
 
 
 // router.put('/users', updtUserById);

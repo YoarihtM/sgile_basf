@@ -30,3 +30,7 @@ export const logout = async (req, res) => {
     req.logOut();
     res.redirect('/login');
 };
+
+export const perfil = async (req, res) => {
+    res.render('users/perfil')
+};

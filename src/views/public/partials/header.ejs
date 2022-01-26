@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../CSS/Bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/basf-principal.css">
     <link rel="stylesheet" href="../CSS/basf-menu.css">
-    <!-- <link rel="stylesheet" href="../CSS/basf-users-form.css"> -->
     <link rel="shortcut icon" href="../img/basf-logo.ico" type="image/x-icon" />
     <title>Menú Principal</title>
 </head>
@@ -25,28 +24,28 @@
                     <div class="row d-flex my-3">
                         <div class="col-md-3 col-sm-12 d-flex align-items-center justify-content-center mt-sm-1 mt-2">
                             <a href="user-data.html">
-                                <img src="../img/user.png" alt="Nombre" class="user-card-img rounded-circle">
+                                <img src="../img/user.png" alt="Nombre" class="user-card-img rounded-circle bg-light">
                             </a>
                         </div>
                         <div class="col-md-9 d-flex align-items-center justify-content-center">
                             <% switch(user.tipo_usuario){ 
                                 case 1: %>
-                                <a href="/profile" class="user-card-name">
+                                <a href="/perfil" class="user-card-name">
                                     Administrador - <%= user.nombre %>
                                 </a>
                             <% break;
                                 case 2: %>
-                                <a href="profile" class="user-card-name">
+                                <a href="/perfil" class="user-card-name">
                                     Moderador - <%= user.nombre %>
                                 </a>
                             <% break;
                                 case 3: %>
-                                <a href="profile" class="user-card-name">
+                                <a href="/perfil" class="user-card-name">
                                     Acceso Limitado - <%= user.nombre %>
                                 </a>
                             <% break;
                                 case 4: %>
-                                <a href="profile" class="user-card-name">
+                                <a href="/perfil" class="user-card-name">
                                     Sólo Vista - <%= user.nombre %>
                                 </a>
                             <% break;
