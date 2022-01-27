@@ -3,6 +3,10 @@
     height: 65rem;
 }
 
+.padding-row {
+    padding-top: 12rem;
+}
+
 .middle-row {
     height: 70%;
     padding: 8% 0%;
