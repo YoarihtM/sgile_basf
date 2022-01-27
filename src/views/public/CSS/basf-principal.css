@@ -7,7 +7,7 @@
     background: rgba(7, 30, 196, .8);
 }
 
-.bg-second{
+.bg-second {
     background: #f8f9fa;
 }
 
@@ -29,7 +29,7 @@
     margin-left: 1rem;
 }
 
-.bg-img-ppal-scene{
+.bg-img-ppal-scene {
     width: 50rem;
     height: 48rem;
 }
@@ -56,7 +56,7 @@
 }
 
 @media only screen and (max-width: 900px) {
-    [class*="login-card"]{
+    [class*="login-card"] {
         width: 30rem;
         margin-top: 7rem;
         margin-right: .2rem;
@@ -65,14 +65,14 @@
 }
 
 @media only screen and (max-width: 900px) {
-    [class*="bg-img-ppal-scene"]{
+    [class*="bg-img-ppal-scene"] {
         width: 20rem;
         height: 40rem;
     }
 }
 
 @media only screen and (max-width: 768px) {
-    [class*="logo"]{
+    [class*="logo"] {
         width: 90%;
     }
 }

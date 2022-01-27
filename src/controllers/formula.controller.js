@@ -4,3 +4,7 @@ import { getConnection, sql, queries } from '../database'
 export const formula = (req, res) => {
     res.render('formulas/formulas')
 };
+
+export const nuevoColor = (req, res) => {
+    res.render('formulas/nuevo-color')
+};
