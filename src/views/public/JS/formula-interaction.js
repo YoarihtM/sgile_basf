@@ -1,5 +1,5 @@
 let cantidadPastas = 0;
-const container = document.querySelector('#contenedor-principal')
+const container = document.querySelector('#contenedor-principal');
 
 const radiosValue = () => {
     const radios = document.querySelector('input[name=crear-formula]:checked').value;
