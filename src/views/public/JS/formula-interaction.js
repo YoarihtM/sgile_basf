@@ -1,89 +1,81 @@
 let cantidadPastas = 0;
 const container = document.querySelector('#contenedor-principal');
 
-const radiosValue = () => {
-    const radios = document.querySelector('input[name=crear-formula]:checked').value;
-
-    if(radios === 'nueva'){
-        nueva();
-    }else if(radios === 'existente'){
-        existente();
-    }
-};
-
-const nueva = () => {
-
-    const agregar = document.querySelector('#agregarPasta');
-
-    if(agregar === null){
-        const divBoton = document.createElement('div');
-        divBoton.classList.add('form-group');    
-        divBoton.classList.add('my-2');
-        divBoton.classList.add('align-self-center');
-        divBoton.classList.add('d-flex');
-        divBoton.classList.add('w-100');
-        divBoton.id = 'divBoton';
-
-        const boton = document.createElement('button');
-        boton.classList.add('btn');
-        boton.classList.add('btn-opcion');
-        boton.classList.add('bg-principal');
-        boton.innerText = 'Agregar Pasta'
-        boton.id = 'agregarPasta';
-        boton.onclick = nuevaPasta;
-
-        divBoton.append(boton);
-        container.append(divBoton);
-        nuevaPasta();
-    }
-
-};
-
-const nuevaPasta = () => {
+const crearInputPasta = () => {
     cantidadPastas += 1;
-    let idInput = 'pasta' + cantidadPastas.toString();
-    let idDivPasta = 'divPasta' + cantidadPastas.toString();
-
     const divPasta = document.createElement('div');
-    divPasta.classList.add('form-group');    
-    divPasta.classList.add('my-2');
+    const inputSap = document.createElement('input');
+    const inputDescripcion = document.createElement('input');
+    const selectorTecnologia = document.createElement('select');    
+    const baseAgua = document.createElement('option');
+    const baseSolvente = document.createElement('option');
+    const selectedOption = document.createElement('option');
+    const btnEliminar = document.createElement('button');
+    let idDiv = 'divPasta' + cantidadPastas.toString();
+    let idInputSap = 'sap' + cantidadPastas.toString();
+    let idInputDescripcion = 'descripcion' + cantidadPastas.toString();
+    let idSelectTecnologia = 'tecnologia' + cantidadPastas.toString();
+    let idBtnEliminar = 'eliminar' + cantidadPastas.toString();
+    
+    baseAgua.value = 'agua';
+    baseAgua.text = 'Base Agua';
+    
+    baseSolvente.value = 'solvente';
+    baseSolvente.text = 'Base Solvente';
+
+    selectedOption.text = 'Seleccione la tecnología';
+    
+    divPasta.classList.add('form-group');
     divPasta.classList.add('align-self-center');
     divPasta.classList.add('d-flex');
     divPasta.classList.add('w-100');
-    divPasta.id = idDivPasta;
+    divPasta.classList.add('my-3');
+    divPasta.id = idDiv ;
+    container.appendChild(divPasta);
     
-    const pasta = document.createElement('input');
-    pasta.classList.add('form-control');
-    pasta.classList.add('input-lg');
-    pasta.placeholder = 'Codigo SAP';
-    pasta.id = idInput;
+    inputSap.classList.add('form-control');
+    inputSap.classList.add('w-100');
+    inputSap.type = 'text';
+    inputSap.id = idInputSap;
+    inputSap.placeholder = 'Código SAP de la Pasta';
+    inputSap.setAttribute('name', idInputSap);
+    divPasta.appendChild(inputSap);
+    
+    inputDescripcion.classList.add('form-control');
+    inputDescripcion.classList.add('w-100');
+    inputDescripcion.classList.add('mx-2');
+    inputDescripcion.type = 'text';
+    inputDescripcion.id = idInputDescripcion;
+    inputDescripcion.placeholder = 'Descripcion';
+    inputDescripcion.setAttribute('name', idInputDescripcion);
+    divPasta.appendChild(inputDescripcion);
+    
+    selectorTecnologia.classList.add('form-select');
+    selectorTecnologia.id = idSelectTecnologia;
+    selectorTecnologia.ariaLabel = 'Seleccion de tecnologia';
+    selectorTecnologia.setAttribute('name', idSelectTecnologia);
+    selectorTecnologia.add(selectedOption, 0);
+    selectorTecnologia.add(baseAgua, 1);
+    selectorTecnologia.add(baseSolvente, 2);
+    selectedOption.selected = true;
+    divPasta.appendChild(selectorTecnologia);
 
-    divPasta.append(pasta);
-    container.append(divPasta);
-
+    btnEliminar.classList.add('btn');
+    btnEliminar.classList.add('btn-outline-danger');
+    btnEliminar.type = 'button';
+    btnEliminar.innerHTML = '<i class="bi bi-x-lg"></i>';
+    divPasta.appendChild(btnEliminar);
+    
 };
 
-const existente = () => {
-    const boton = document.querySelector('#agregarPasta');
-    const divBoton = document.querySelector('#divBoton');
-    let pastas = '#pasta'
-    let divPastas = '#divPasta'
-
-    if(boton !== null){
-        boton.remove();
-    }
-
-    if(divBoton !== null){
-        divBoton.remove();
-    }
-
+const eliminarInputPasta = () => {
     if(cantidadPastas !== 0){
-        for(let i=1; i<=cantidadPastas; i++){
-            let divPasta = document.querySelector(divPastas + i.toString());
-            divPasta.remove();
-        }
+        let idDiv = '#divPasta' + cantidadPastas.toString();
+        const divPasta = document.querySelector(idDiv);
+        divPasta.remove();
+        cantidadPastas -= 1;
+    }else{
+        alert('Debe existir al menos una pasta');
     }
-
-    cantidadPastas = 0;
 
 };

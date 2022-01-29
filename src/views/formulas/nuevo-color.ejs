@@ -2,27 +2,41 @@
 
     <div class="row padding-row my-md-5 d-flex justify-content-center">
         <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
-            <form action="/usuarios/crear-administrador" method="post" class="w-100 h-100">
+            <form action="/formula/nuevo-color" method="post" class="w-100 h-100">
                 <div class="row d-flex align-self-center p-5">
                     <div class="col-12 d-flex flex-column" id="contenedor-principal">
-                        <div class="form-group align-self-center d-flex w-100 my-3">
+                        <h5 class="text-light text-center my-2">Datos del Color</h5>
+                        <div class="form-group align-self-center d-flex w-100 my-3" id="datosColor">
                             <input name="sap" placeholder="Codigo SAP" type="text" class="form-control input-lg"
                                 autofocus>
                         </div>
                         <div class="form-group align-self-center d-flex w-100 my-3">
                             <input name="descripcion" placeholder="Descripción" type="text" class="form-control w-100">
                         </div>
-                        <div class="d-flex align-self-center">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" onclick="radiosValue()" type="radio"
-                                    name="crear-formula" id="nueva-formula" value="nueva">
-                                <label for="nueva-formula" class="form-check-label text-light">Nueva Formula</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" onclick="radiosValue()" type="radio"
-                                    name="crear-formula" id="existente" value="existente">
-                                <label for="existente" class="form-check-label text-light">Formula Existente</label>
-                            </div>
+                        <div class="form-group align-self-center d-flex w-100 my-3">
+                            <textarea class="form-control" name="comentarioColor" id="comentarioColor" placeholder="Comentarios del Color" rows="3"></textarea>
+                        </div>
+                        <h5 class="text-light text-center my-2">BOM de la Formula</h5>
+                        <div class="form-group align-self-center d-flex w-100 my-3">
+                            <input name="bom" placeholder="Nueva BOM" type="text" class="form-control w-100">
+                        </div>
+                        <div class="form-group align-self-center d-flex w-100 my-3">
+                            <textarea class="form-control" name="comentarioFormula" id="comentarioFormula" placeholder="Comentarios de la Formula" rows="3"></textarea>
+                        </div>
+                        <h5 class="text-light text-center my-2">Pastas de la Formula<i class="far fa-minus-square"></i></h5>
+                        <div class="form-group align-self-center justify-content-center d-flex w-100 my-3">
+                            <button type="button" class="btn btn-opcion bg-principal w-25" id="agregarPasta" onclick="crearInputPasta()">Agregar Pasta</button>
+                        </div>
+                        <div class="form-group align-self-center d-flex w-100 my-3" id="divPasta">
+                            <input name="sap" placeholder="Código SAP de la pasta" type="text" class="form-control w-100" id="sap">
+                            <input name="descripcion" placeholder="Descripcion" type="text" class="form-control w-100 mx-2" id="descripcion">
+                            <select name="tecnologia" class="form-select" aria-label="Seleccion de tecnologia" id="tecnologia">
+
+                                <option selected >Seleccione la tecnología </option>
+                                <option value="agua">Base Agua</option>
+                                <option value="solvente">Base Solvente</option>
+
+                            </select>
                         </div>
                     </div>
                     <div class="form-group align-self-center d-flex w-100 my-3">
