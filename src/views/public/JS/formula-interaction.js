@@ -6,7 +6,7 @@ const crearInputPasta = () => {
     const divPasta = document.createElement('div');
     const inputSap = document.createElement('input');
     const inputDescripcion = document.createElement('input');
-    const selectorTecnologia = document.createElement('select');    
+    const selectorTecnologia = document.createElement('select');
     const baseAgua = document.createElement('option');
     const baseSolvente = document.createElement('option');
     const selectedOption = document.createElement('option');
@@ -16,23 +16,23 @@ const crearInputPasta = () => {
     let idInputDescripcion = 'descripcion' + cantidadPastas.toString();
     let idSelectTecnologia = 'tecnologia' + cantidadPastas.toString();
     let idBtnEliminar = 'eliminar' + cantidadPastas.toString();
-    
-    baseAgua.value = 'agua';
+
+    baseAgua.value = 'Base Agua';
     baseAgua.text = 'Base Agua';
-    
-    baseSolvente.value = 'solvente';
+
+    baseSolvente.value = 'Base Solvente';
     baseSolvente.text = 'Base Solvente';
 
     selectedOption.text = 'Seleccione la tecnología';
-    
+
     divPasta.classList.add('form-group');
     divPasta.classList.add('align-self-center');
     divPasta.classList.add('d-flex');
     divPasta.classList.add('w-100');
     divPasta.classList.add('my-3');
-    divPasta.id = idDiv ;
+    divPasta.id = idDiv;
     container.appendChild(divPasta);
-    
+
     inputSap.classList.add('form-control');
     inputSap.classList.add('w-100');
     inputSap.type = 'text';
@@ -40,7 +40,7 @@ const crearInputPasta = () => {
     inputSap.placeholder = 'Código SAP de la Pasta';
     inputSap.setAttribute('name', idInputSap);
     divPasta.appendChild(inputSap);
-    
+
     inputDescripcion.classList.add('form-control');
     inputDescripcion.classList.add('w-100');
     inputDescripcion.classList.add('mx-2');
@@ -49,7 +49,7 @@ const crearInputPasta = () => {
     inputDescripcion.placeholder = 'Descripcion';
     inputDescripcion.setAttribute('name', idInputDescripcion);
     divPasta.appendChild(inputDescripcion);
-    
+
     selectorTecnologia.classList.add('form-select');
     selectorTecnologia.classList.add('me-2');
     selectorTecnologia.id = idSelectTecnologia;
@@ -68,7 +68,7 @@ const crearInputPasta = () => {
     btnEliminar.setAttribute('onclick', 'eliminarInputPasta(this)');
     btnEliminar.innerHTML = '<i class="bi bi-x-lg"></i>';
     divPasta.appendChild(btnEliminar);
-    
+
 };
 
 const eliminarInputPasta = (boton) => {
@@ -88,7 +88,7 @@ const eliminarInputPasta = (boton) => {
     tecnologia.remove();
     boton.remove();
 
-    for(let i = (indice * 1) + 1; i < cantidadPastas; i++){
+    for (let i = (indice * 1) + 1; i <= cantidadPastas; i++) {
         idDiv = '#divPasta' + i.toString();
         idSap = '#sap' + i.toString();
         idDescripcion = '#descripcion' + i.toString();
@@ -100,23 +100,23 @@ const eliminarInputPasta = (boton) => {
         let idBtn = '#eliminar' + i.toString();
         let btn = document.querySelector(idBtn);
 
-        divPasta.id = 'divPasta' + (i-1).toString();
-        divPasta.setAttribute('name', 'divPasta' + (i-1).toString());
+        divPasta.id = 'divPasta' + (i - 1).toString();
+        divPasta.setAttribute('name', 'divPasta' + (i - 1).toString());
 
-        sap.id = 'sap' + (i-1).toString();
-        sap.setAttribute('name', 'sap' + (i-1).toString());
+        sap.id = 'sap' + (i - 1).toString();
+        sap.setAttribute('name', 'sap' + (i - 1).toString());
 
-        descripcion.id = 'descripcion' + (i-1).toString();
-        descripcion.setAttribute('name', 'descripcion' + (i-1).toString());
+        descripcion.id = 'descripcion' + (i - 1).toString();
+        descripcion.setAttribute('name', 'descripcion' + (i - 1).toString());
 
-        tecnologia.id = 'tecnologia' + (i-1).toString();
-        tecnologia.setAttribute('name', 'tecnologia' + (i-1).toString());
+        tecnologia.id = 'tecnologia' + (i - 1).toString();
+        tecnologia.setAttribute('name', 'tecnologia' + (i - 1).toString());
 
-        btn.id = 'eliminar' + (i-1).toString();
-        btn.setAttribute('name', 'eliminar' + (i-1).toString());
+        btn.id = 'eliminar' + (i - 1).toString();
+        btn.setAttribute('name', 'eliminar' + (i - 1).toString());
     }
 
-    if(cantidadPastas !== 0){
+    if (cantidadPastas !== 0) {
         cantidadPastas -= 1;
     }
 
