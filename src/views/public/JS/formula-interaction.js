@@ -51,6 +51,7 @@ const crearInputPasta = () => {
     divPasta.appendChild(inputDescripcion);
     
     selectorTecnologia.classList.add('form-select');
+    selectorTecnologia.classList.add('me-2');
     selectorTecnologia.id = idSelectTecnologia;
     selectorTecnologia.ariaLabel = 'Seleccion de tecnologia';
     selectorTecnologia.setAttribute('name', idSelectTecnologia);
@@ -61,21 +62,63 @@ const crearInputPasta = () => {
     divPasta.appendChild(selectorTecnologia);
 
     btnEliminar.classList.add('btn');
-    btnEliminar.classList.add('btn-outline-danger');
+    btnEliminar.classList.add('btn-danger');
     btnEliminar.type = 'button';
+    btnEliminar.id = idBtnEliminar;
+    btnEliminar.setAttribute('onclick', 'eliminarInputPasta(this)');
     btnEliminar.innerHTML = '<i class="bi bi-x-lg"></i>';
     divPasta.appendChild(btnEliminar);
     
 };
 
-const eliminarInputPasta = () => {
-    if(cantidadPastas !== 0){
-        let idDiv = '#divPasta' + cantidadPastas.toString();
-        const divPasta = document.querySelector(idDiv);
-        divPasta.remove();
-        cantidadPastas -= 1;
-    }else{
-        alert('Debe existir al menos una pasta');
+const eliminarInputPasta = (boton) => {
+    const indice = boton.id[boton.id.length - 1];
+    let idDiv = '#divPasta' + indice;
+    let idSap = '#sap' + indice;
+    let idDescripcion = '#descripcion' + indice;
+    let idTecnologia = '#tecnologia' + indice;
+    let divPasta = document.querySelector(idDiv);
+    let sap = document.querySelector(idSap);
+    let descripcion = document.querySelector(idDescripcion);
+    let tecnologia = document.querySelector(idTecnologia);
+
+    divPasta.remove();
+    sap.remove();
+    descripcion.remove();
+    tecnologia.remove();
+    boton.remove();
+
+    for(let i = (indice * 1) + 1; i < cantidadPastas; i++){
+        idDiv = '#divPasta' + i.toString();
+        idSap = '#sap' + i.toString();
+        idDescripcion = '#descripcion' + i.toString();
+        idTecnologia = '#tecnologia' + i.toString();
+        divPasta = document.querySelector(idDiv);
+        sap = document.querySelector(idSap);
+        descripcion = document.querySelector(idDescripcion);
+        tecnologia = document.querySelector(idTecnologia);
+        let idBtn = '#eliminar' + i.toString();
+        let btn = document.querySelector(idBtn);
+
+        divPasta.id = 'divPasta' + (i-1).toString();
+        divPasta.setAttribute('name', 'divPasta' + (i-1).toString());
+
+        sap.id = 'sap' + (i-1).toString();
+        sap.setAttribute('name', 'sap' + (i-1).toString());
+
+        descripcion.id = 'descripcion' + (i-1).toString();
+        descripcion.setAttribute('name', 'descripcion' + (i-1).toString());
+
+        tecnologia.id = 'tecnologia' + (i-1).toString();
+        tecnologia.setAttribute('name', 'tecnologia' + (i-1).toString());
+
+        btn.id = 'eliminar' + (i-1).toString();
+        btn.setAttribute('name', 'eliminar' + (i-1).toString());
     }
 
+    if(cantidadPastas !== 0){
+        cantidadPastas -= 1;
+    }
+
+    console.log(cantidadPastas);
 };
