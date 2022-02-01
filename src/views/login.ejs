@@ -36,10 +36,7 @@
                             <label for="correo" class="form-label text-light fs-4">
                                 Correo
                             </label>
-                            <input type="text" name="correo" id="correo" class="input-box form-control border border-danger" required>
-                            <div class="invalid-tooltip">
-                                <%= message %>
-                            </div>
+                            <input type="text" name="correo" id="correo" class="input-box form-control is-invalid" placeholder="Correo no existente" required>
                             <label for="contrasena" class="form-label text-light fs-4 mt-5">
                                 Contraseña
                             </label>
@@ -52,10 +49,7 @@
                             <label for="contrasena" class="form-label text-light fs-4 mt-5">
                                 Contraseña
                             </label>
-                            <input type="password" name="contrasena" id="contrasena" class="input-box form-control border border-danger">
-                            <div class="invalid-tooltip">
-                                <%= message %>
-                            </div>
+                            <input type="password" name="contrasena" id="contrasena" class="input-box form-control is-invalid" placeholder="Contraseña incorrecta">
                         <% } else { %>
                             <label for="correo" class="form-label text-light fs-4">
                                 Correo
