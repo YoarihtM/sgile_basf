@@ -32,14 +32,40 @@
                         ¡Bienvenido!
                     </h4> 
                     <form action="/login" method="post" class="mt-5 text-center">
-                        <label for="usuario" class="form-label text-light fs-4">
-                            Correo
-                        </label>
-                        <input type="text" name="correo" id="correo" class="input-box form-control">
-                        <label for="contrasena" class="form-label text-light fs-4 mt-5">
-                            Contraseña
-                        </label>
-                        <input type="password" name="contrasena" id="contrasena" class="input-box form-control">
+                        <% if(message == 'El usuario no existe'){ %>
+                            <label for="correo" class="form-label text-light fs-4">
+                                Correo
+                            </label>
+                            <input type="text" name="correo" id="correo" class="input-box form-control border border-danger" required>
+                            <div class="invalid-tooltip">
+                                <%= message %>
+                            </div>
+                            <label for="contrasena" class="form-label text-light fs-4 mt-5">
+                                Contraseña
+                            </label>
+                            <input type="password" name="contrasena" id="contrasena" class="input-box form-control">
+                        <% } else if(message == 'Contraseña incorrecta'){ %>
+                            <label for="correo" class="form-label text-light fs-4">
+                                Correo
+                            </label>
+                            <input type="text" name="correo" id="correo" class="input-box form-control" required>
+                            <label for="contrasena" class="form-label text-light fs-4 mt-5">
+                                Contraseña
+                            </label>
+                            <input type="password" name="contrasena" id="contrasena" class="input-box form-control border border-danger">
+                            <div class="invalid-tooltip">
+                                <%= message %>
+                            </div>
+                        <% } else { %>
+                            <label for="correo" class="form-label text-light fs-4">
+                                Correo
+                            </label>
+                            <input type="text" name="correo" id="correo" class="input-box form-control" required>
+                            <label for="contrasena" class="form-label text-light fs-4 mt-5">
+                                Contraseña
+                            </label>
+                            <input type="password" name="contrasena" id="contrasena" class="input-box form-control">
+                        <% } %>
                         <button type="submit" class="btn-opcion btn mt-5 bg-principal">
                             Iniciar Sesión
                         </button>
