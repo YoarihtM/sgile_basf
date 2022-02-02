@@ -14,17 +14,20 @@ export const queries = {
 
 // -------------------------------------------------------------------------------------------------------
 
+    getAllPaste: 'SELECT cod_sap FROM pasta',
     addNewPaste: 'INSERT INTO pasta (cod_sap, descripcion, tecnologia) VALUES (@cod_sap, @descripcion, @tecnologia)',
     getPasteBySAP: 'SELECT * FROM pasta WHERE cod_sap = @cod_sap',
 
 // -------------------------------------------------------------------------------------------------------
 
     addNewPasteBatch: 'INSERT INTO lote_pasta (cod_lote, comentario) VALUES (@cod_lote, @comentario)',
+    getPasteBatchById: 'SELECT * FROM lote_pasta WHERE id = @id',
     getPasteBatchByCode: 'SELECT * FROM lote_pasta WHERE cod_lote = @cod_lote',
 
 // -------------------------------------------------------------------------------------------------------
 
-    addNewRelationPasteBatch: 'INSERT INTO pasta_lote-pasta (cod_sap, id_lote) VALUES (@cod_sap, @id_lote)',
+    addNewRelationPasteBatch: 'INSERT INTO pasta_lote_pasta (cod_sap, id_lote) VALUES (@cod_sap, @id_lote)',
+    getBatchesRelatedBySap: 'SELECT id_lote FROM pasta_lote_pasta WHERE cod_sap = @cod_sap',
 
 // -------------------------------------------------------------------------------------------------------
 

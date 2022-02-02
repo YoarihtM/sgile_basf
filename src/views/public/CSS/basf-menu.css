@@ -112,6 +112,17 @@
     height: 5rem;
 }
 
+.border-principal{
+    border-style: solid;
+    border-color: rgba(7, 30, 196, .8);
+}
+
+.body-card-info {
+    background: #f8f9fa;
+    border-style: solid 2px;
+    border-color: #071EC4;
+}
+
 @media only screen and (max-width: 768px) {
     [class*="btn-task"] {
         width: 100%;

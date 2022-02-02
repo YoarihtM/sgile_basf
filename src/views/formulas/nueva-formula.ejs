@@ -1,0 +1,42 @@
+<%- include("../public/partials/header") -%>
+
+    <div class="row padding-row my-md-5 d-flex justify-content-center">
+        
+        <% if(message !='' ){ %>
+            <div class="container p-4 m-0">
+                <div class="row m-0">
+                    <div class="col">
+                        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                            <%= message %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Cerrar"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <% if(success !='' ){ %>
+            <div class="container p-4 m-0">
+                <div class="row m-0">
+                    <div class="col">
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                            <%= success %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Cerrar"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
+
+            <form action="/formula/nueva-formula" method="post" class="w-100 h-100">
+
+            </form>
+
+        </div>
+    </div>
+
+    <%- include("../public/partials/footer-formula") -%>
