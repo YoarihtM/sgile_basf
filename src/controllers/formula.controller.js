@@ -13,7 +13,9 @@ export const nuevoColor = async (req, res) => {
     const result = await pool.request().query(queries.getAllPaste);
     console.log(result.recordset);
 
-    res.render('formulas/nuevo-color');
+    res.render('formulas/nuevo-color', {
+        sapCodes: result.recordset
+    });
 };
 
 export const nuevoColorRegistrado = async (req, res) => {

@@ -1,5 +1,9 @@
 <%- include("../public/partials/header") -%>
 
+    <script>
+        let info = <%- JSON.stringify(sapCodes) %>
+    </script>
+
     <div class="row padding-row my-md-5 d-flex justify-content-center">
         <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
             <form action="/formula/nuevo-color" method="post" class="w-100 h-100">
@@ -27,16 +31,29 @@
                         <div class="form-group align-self-center justify-content-center d-flex w-100 my-3">
                             <button type="button" class="btn btn-opcion bg-principal w-25" id="agregarPasta" onclick="crearInputPasta()">Agregar Pasta</button>
                         </div>
-                        <div class="form-group align-self-center d-flex w-100 my-3" id="divPasta">
-                            <input name="sap" placeholder="Código SAP de la pasta" type="text" class="form-control w-100" id="sap">
-                            <input name="descripcion" placeholder="Descripcion" type="text" class="form-control w-100 mx-2" id="descripcion">
-                            <select name="tecnologia" class="form-select" aria-label="Seleccion de tecnologia" id="tecnologia">
-
-                                <option selected >Seleccione la tecnología </option>
-                                <option value="Base Agua">Base Agua</option>
-                                <option value="Base Solvente">Base Solvente</option>
-
-                            </select>
+                        <div class="form-group align-self-center d-flex w-100 my-3 justify-content-center flex-column" id="divPasta">
+                            <div class="d-flex justify-content-center w-100 align-self-center my-1" id="radios">
+                                <div class="form-check mx-3">
+                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaExistente(this)" id="existente" checked>
+                                    <label for="existente" class="form-check-label text-light">
+                                        Pasta existente
+                                    </label>
+                                </div>
+                                <div class="form-check mx-3">
+                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaNueva(this)" id="nueva">
+                                    <label for="nueva" class="form-check-label text-light">
+                                        Nueva pasta
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center w-100 align-self-center my-1" id="infoPasta">
+                                <select name="sap" class="form-select" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
+                                    <option selected >Seleccione la Pasta </option>
+                                    <% sapCodes.forEach( function(sapCode) { %>
+                                        <option value="<%= sapCode.cod_sap %>"><%= sapCode.cod_sap %></option>
+                                    <% }); %>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group align-self-center d-flex w-100 my-3">

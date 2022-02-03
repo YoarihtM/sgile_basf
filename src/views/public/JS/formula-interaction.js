@@ -1,124 +1,142 @@
 let cantidadPastas = 0;
 const container = document.querySelector('#contenedor-principal');
+const containerInfoPasta = document.querySelector('#infoPasta');
 
-const crearInputPasta = () => {
-    cantidadPastas += 1;
-    const divPasta = document.createElement('div');
-    const inputSap = document.createElement('input');
-    const inputDescripcion = document.createElement('input');
-    const selectorTecnologia = document.createElement('select');
-    const baseAgua = document.createElement('option');
-    const baseSolvente = document.createElement('option');
-    const selectedOption = document.createElement('option');
-    const btnEliminar = document.createElement('button');
-    let idDiv = 'divPasta' + cantidadPastas.toString();
-    let idInputSap = 'sap' + cantidadPastas.toString();
-    let idInputDescripcion = 'descripcion' + cantidadPastas.toString();
-    let idSelectTecnologia = 'tecnologia' + cantidadPastas.toString();
-    let idBtnEliminar = 'eliminar' + cantidadPastas.toString();
+const crearDiv = (id) => {
+    const div = document.createElement('div');
+    div.classList.add('form-group');
+    div.classList.add('align-self-center');
+    div.classList.add('d-flex');
+    div.classList.add('w-100');
+    div.classList.add('my-3');
+    div.id = id;
 
-    baseAgua.value = 'Base Agua';
-    baseAgua.text = 'Base Agua';
+    return div;
+};
 
-    baseSolvente.value = 'Base Solvente';
-    baseSolvente.text = 'Base Solvente';
+const crearInput = (id, placeholder) =>{
+    const input = document.createElement('input');
+    input.classList.add('form-control');
+    input.classList.add('w-100');
+    input.type = 'text';
+    input.id = id;
+    input.placeholder = placeholder;
+    input.setAttribute('name', id);
+    console.log('Crear input');
 
-    selectedOption.text = 'Seleccione la tecnología';
+    return input;
+};
 
-    divPasta.classList.add('form-group');
-    divPasta.classList.add('align-self-center');
-    divPasta.classList.add('d-flex');
-    divPasta.classList.add('w-100');
-    divPasta.classList.add('my-3');
-    divPasta.id = idDiv;
-    container.appendChild(divPasta);
+const crearRadio = (id, name, label) => {
+    const radio = document.createElement('input');
+    radio.classList.add('form-check-input');
+    radio.type = 'radio';
+    radio.id = id;
+    radio.setAttribute('name', name);
+    radio.setAttribute('onclick', 'divActual(this)');
 
-    inputSap.classList.add('form-control');
-    inputSap.classList.add('w-100');
-    inputSap.type = 'text';
-    inputSap.id = idInputSap;
-    inputSap.placeholder = 'Código SAP de la Pasta';
-    inputSap.setAttribute('name', idInputSap);
-    divPasta.appendChild(inputSap);
+    const lblRadio = document.createElement('label');
+    lblRadio.classList.add('form-check-label');
+    lblRadio.classList.add('text-light');
+    lblRadio.setAttribute('for', id);
+    lblRadio.innerText = label;
 
-    inputDescripcion.classList.add('form-control');
-    inputDescripcion.classList.add('w-100');
-    inputDescripcion.classList.add('mx-2');
-    inputDescripcion.type = 'text';
-    inputDescripcion.id = idInputDescripcion;
-    inputDescripcion.placeholder = 'Descripcion';
-    inputDescripcion.setAttribute('name', idInputDescripcion);
-    divPasta.appendChild(inputDescripcion);
+    return {radio, lblRadio};
+};
 
-    selectorTecnologia.classList.add('form-select');
-    selectorTecnologia.classList.add('me-2');
-    selectorTecnologia.id = idSelectTecnologia;
-    selectorTecnologia.ariaLabel = 'Seleccion de tecnologia';
-    selectorTecnologia.setAttribute('name', idSelectTecnologia);
-    selectorTecnologia.add(selectedOption, 0);
-    selectorTecnologia.add(baseAgua, 1);
-    selectorTecnologia.add(baseSolvente, 2);
+const divActual = (elemento) => {
+    console.log(elemento);
+};
+
+const crearOpcion = (valor) => {
+    const option = document.createElement('option');
+
+    option.value = valor;
+    option.text = valor;
+
+    return option;
+};
+
+const crearSelectorTecnologia = (id) => {
+    const select = document.createElement('select');
+    const selectedOption = crearOpcion('Seleccione la tecnología');
+    const baseAgua = crearOpcion('Base Agua');
+    const baseSolvente = crearOpcion('Base Solvente');
+    
+    select.classList.add('form-select');
+    select.classList.add('me-2');
+    select.ariaLabel = 'Seleccion de tecnología';
+    select.id = id;
+    select.setAttribute('name', id);
+    select.add(selectedOption, 0);
+    select.add(baseAgua, 1);
+    select.add(baseSolvente, 2);
     selectedOption.selected = true;
-    divPasta.appendChild(selectorTecnologia);
+    
+    return select;
+};
 
-    btnEliminar.classList.add('btn');
-    btnEliminar.classList.add('btn-danger');
-    btnEliminar.type = 'button';
-    btnEliminar.id = idBtnEliminar;
-    btnEliminar.setAttribute('onclick', 'eliminarInputPasta(this)');
-    btnEliminar.innerHTML = '<i class="bi bi-x-lg"></i>';
-    divPasta.appendChild(btnEliminar);
+const crearSelectorPastas = (id) => {
+    const select = document.createElement('select');
+    const selectedOption = crearOpcion('Seleccione la Pasta');
+
+    select.classList.add('form-select');
+    select.ariaLabel = 'Seleccion de pasta';
+    select.add(selectedOption, 0);
+        info.forEach(pasta => {
+            const sap = crearOpcion(pasta.cod_sap);
+            select.add(sap);
+        });
+    select.id = id;
+    select.setAttribute('name', id);
+    selectedOption.selected = true;
+
+    return select;
+};
+
+const crearBtnBorrar = (id) => {
+    const boton = document.createElement('button');
+    
+    boton.classList.add('btn');
+    boton.classList.add('btn-danger');
+    boton.type = 'button';
+    boton.id = id;
+    boton.setAttribute('onclick', 'eliminarInputPasta(this)');
+    boton.innerHTML = '<i class="bi bi-x-lg"></i>';
+
+    return boton;
+};
+
+const pastaExistente = (elemento) => {
+
+    if(elemento.id == 'existente'){
+        containerInfoPasta.innerHTML = '';
+        const selecPasta = crearSelectorPastas('sap');
+        containerInfoPasta.append(selecPasta);
+    }else{
+        console.log('otro');
+    }
 
 };
 
+const pastaNueva = (elemento) => {
+
+    if(elemento.id == 'nueva'){
+        console.log('nueva');
+    }else{
+        console.log('otro');
+    }
+
+};
+
+const crearInputPasta = () => {
+    cantidadPastas += 1;
+
+    console.log(cantidadPastas);
+};
+
 const eliminarInputPasta = (boton) => {
-    const indice = boton.id[boton.id.length - 1];
-    let idDiv = '#divPasta' + indice;
-    let idSap = '#sap' + indice;
-    let idDescripcion = '#descripcion' + indice;
-    let idTecnologia = '#tecnologia' + indice;
-    let divPasta = document.querySelector(idDiv);
-    let sap = document.querySelector(idSap);
-    let descripcion = document.querySelector(idDescripcion);
-    let tecnologia = document.querySelector(idTecnologia);
-
-    divPasta.remove();
-    sap.remove();
-    descripcion.remove();
-    tecnologia.remove();
-    boton.remove();
-
-    for (let i = (indice * 1) + 1; i <= cantidadPastas; i++) {
-        idDiv = '#divPasta' + i.toString();
-        idSap = '#sap' + i.toString();
-        idDescripcion = '#descripcion' + i.toString();
-        idTecnologia = '#tecnologia' + i.toString();
-        divPasta = document.querySelector(idDiv);
-        sap = document.querySelector(idSap);
-        descripcion = document.querySelector(idDescripcion);
-        tecnologia = document.querySelector(idTecnologia);
-        let idBtn = '#eliminar' + i.toString();
-        let btn = document.querySelector(idBtn);
-
-        divPasta.id = 'divPasta' + (i - 1).toString();
-        divPasta.setAttribute('name', 'divPasta' + (i - 1).toString());
-
-        sap.id = 'sap' + (i - 1).toString();
-        sap.setAttribute('name', 'sap' + (i - 1).toString());
-
-        descripcion.id = 'descripcion' + (i - 1).toString();
-        descripcion.setAttribute('name', 'descripcion' + (i - 1).toString());
-
-        tecnologia.id = 'tecnologia' + (i - 1).toString();
-        tecnologia.setAttribute('name', 'tecnologia' + (i - 1).toString());
-
-        btn.id = 'eliminar' + (i - 1).toString();
-        btn.setAttribute('name', 'eliminar' + (i - 1).toString());
-    }
-
-    if (cantidadPastas !== 0) {
-        cantidadPastas -= 1;
-    }
+    cantidadPastas -= 1;
 
     console.log(cantidadPastas);
 };
