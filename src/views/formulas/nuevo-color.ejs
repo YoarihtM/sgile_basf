@@ -5,6 +5,35 @@
     </script>
 
     <div class="row padding-row my-md-5 d-flex justify-content-center">
+
+        <% if(message !='' ){ %>
+            <div class="container p-4 m-0">
+                <div class="row m-0">
+                    <div class="col">
+                        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                            <%= message %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Cerrar"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        <% if(success !='' ){ %>
+            <div class="container p-4 m-0">
+                <div class="row m-0">
+                    <div class="col">
+                        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                            <%= success %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Cerrar"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
         <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
             <form action="/formula/nuevo-color" method="post" class="w-100 h-100">
                 <div class="row d-flex align-self-center p-5">
@@ -12,20 +41,20 @@
                         <h5 class="text-light text-center my-2">Datos del Color</h5>
                         <div class="form-group align-self-center d-flex w-100 my-3" id="datosColor">
                             <input name="sapColor" placeholder="Codigo SAP" type="text" class="form-control input-lg"
-                                autofocus>
+                                autofocus required>
                         </div>
                         <div class="form-group align-self-center d-flex w-100 my-3">
-                            <input name="descripcionColor" placeholder="Descripción" type="text" class="form-control w-100">
+                            <input name="descripcionColor" placeholder="Descripción" type="text" class="form-control w-100" required>
                         </div>
                         <div class="form-group align-self-center d-flex w-100 my-3">
                             <textarea class="form-control" name="comentarioColor" id="comentarioColor" placeholder="Comentarios del Color" rows="3"></textarea>
                         </div>
                         <h5 class="text-light text-center my-2">BOM de la Formula</h5>
                         <div class="form-group align-self-center d-flex w-100 my-3">
-                            <input name="bom" placeholder="Nueva BOM" type="text" class="form-control w-100">
+                            <input name="bom" placeholder="Nueva BOM" type="text" class="form-control w-100" required>
                         </div>
                         <div class="form-group align-self-center d-flex w-100 my-3">
-                            <textarea class="form-control" name="comentarioFormula" id="comentarioFormula" placeholder="Comentarios de la Formula" rows="3"></textarea>
+                            <textarea class="form-control" name="comentarioBom" id="comentarioFormula" placeholder="Comentarios de la Formula" rows="3"></textarea>
                         </div>
                         <h5 class="text-light text-center my-2">Pastas de la Formula</h5>
                         <div class="form-group align-self-center justify-content-center d-flex w-100 my-3">
@@ -34,25 +63,26 @@
                         <div class="form-group align-self-center d-flex w-100 my-3 justify-content-center flex-column" id="divPasta">
                             <div class="d-flex justify-content-around w-100 align-self-center my-1" id="radios">
                                 <div class="form-check mx-3">
-                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaExistente(this)" id="existente" checked>
+                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaExistente(this)" id="existente" value="existente" checked>
                                     <label for="existente" class="form-check-label text-light">
                                         Pasta existente
                                     </label>
                                 </div>
                                 <div class="form-check mx-3">
-                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaNueva(this)" id="nueva">
+                                    <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaNueva(this)" id="nueva" value="nueva">
                                     <label for="nueva" class="form-check-label text-light">
                                         Nueva pasta
                                     </label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center w-100 align-self-center my-1" id="infoPasta">
-                                <select name="sap" class="form-select" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
+                                <select name="sap" class="form-select me-3" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
                                     <option selected >Seleccione la Pasta </option>
                                     <% sapCodes.forEach( function(sapCode) { %>
                                         <option value="<%= sapCode.cod_sap %>"><%= sapCode.cod_sap %></option>
                                     <% }); %>
                                 </select>
+                                <input name="cantidad" placeholder="Cantidad en Kg" type="number" min="0.000" step="1" class="form-control w-25 ms-auto" required>
                             </div>
                         </div>
                     </div>

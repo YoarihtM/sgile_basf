@@ -10,7 +10,8 @@ export const queries = {
 // -------------------------------------------------------------------------------------------------------
 
     getAllColor: 'SELECT * FROM color',
-    addNewColor: 'INSERT INTO color (cod_sap, descripcion, id_formula, comentario) VALUES (@cod_sap, @descripcion, @id_formula, @comentario)',
+    addNewColor: 'INSERT INTO color (cod_sap, descripcion, comentario) VALUES (@cod_sap, @descripcion, @comentario)',
+    getIdColor: 'SELECT id FROM color WHERE cod_sap = @cod_sap',
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -33,6 +34,15 @@ export const queries = {
 
     getAllFormula: 'SELECT * FROM formula',
     addNewFormula: 'INSERT INTO formula (bom, comentario) VALUES (@bom, @comentario)',
+    getIdFormula: 'SELECT id FROM formula WHERE bom = @bom',
+
+// -------------------------------------------------------------------------------------------------------
+
+    addNewRelationColorFormula: 'INSERT INTO color_formula (id_color, sap_color, id_formula) VALUES (@id_color, @sap_color, @id_formula)',
+
+// -------------------------------------------------------------------------------------------------------
+
+    addNewRelationFormulaPaste: 'INSERT INTO pasta_formula (id_formula, cod_sap, cantidad) VALUES (@id_formula, @cod_sap, @cantidad)',
 
 // -------------------------------------------------------------------------------------------------------
 

@@ -105,12 +105,37 @@ const pastaExistente = (elemento) => {
     if(elemento.id == 'existente'){
         containerInfoPasta.innerHTML = '';
         const selecPasta = crearSelectorPastas('sap');
+        const inputCantidad = crearInput('cantidad', 'Cantidad en Kg');
+
+        inputCantidad.setAttribute('type', 'number');
+        inputCantidad.setAttribute('min', '0.000');
+        inputCantidad.setAttribute('step', '1');
+        inputCantidad.classList.remove('w-100');
+        inputCantidad.classList.add('w-25');
+        inputCantidad.classList.add('ms-auto');
+
+        selecPasta.classList.add('me-3');
+
         containerInfoPasta.append(selecPasta);
+        containerInfoPasta.append(inputCantidad);
     }else{
         let posicion = elemento.id[elemento.id.length - 1];
         const divInfo = document.querySelector(`#infoPasta${posicion}`);
-
-        console.log(divInfo);
+        const selecPasta = crearSelectorPastas(`sap${posicion}`);
+        const inputCantidad = crearInput(`cantidad${posicion}`, 'Cantidad en Kg');
+        
+        inputCantidad.setAttribute('type', 'number');
+        inputCantidad.setAttribute('min', '0.000');
+        inputCantidad.setAttribute('step', '1');
+        inputCantidad.classList.remove('w-100');
+        inputCantidad.classList.add('w-25');
+        inputCantidad.classList.add('ms-auto');
+        
+        selecPasta.classList.add('me-3');
+        
+        divInfo.innerHTML = '';
+        divInfo.append(selecPasta);
+        divInfo.append(inputCantidad);
     }
 
 };
@@ -123,15 +148,49 @@ const pastaNueva = (elemento) => {
         const inputSap = crearInput('sap', 'Código SAP de la pasta');
         const inputDesc = crearInput('descripcion', 'Descripción');
         const selecTec = crearSelectorTecnologia('tecnologia');
+        const inputCantidad = crearInput(`cantidad`, 'Cantidad en Kg');
 
+        inputCantidad.setAttribute('type', 'number');
+        inputCantidad.setAttribute('min', '0.000');
+        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('required', '');
         inputSap.classList.add('me-2');
+        inputSap.setAttribute('required', '');
         inputDesc.classList.add('me-2');
+        inputDesc.setAttribute('required', '');
+        selecTec.classList.add('me-2');
 
         containerInfoPasta.append(inputSap);
         containerInfoPasta.append(inputDesc);
         containerInfoPasta.append(selecTec);
+        containerInfoPasta.append(inputCantidad);
     }else{
-        console.log('otro');
+        let posicion = elemento.id[elemento.id.length - 1];
+        const divInfo = document.querySelector(`#infoPasta${posicion}`);
+        const inputSap = crearInput(`sap${posicion}`, 'Código SAP de la pasta');
+        const inputDesc = crearInput(`descripcion${posicion}`, 'Descripción');
+        const selecTec = crearSelectorTecnologia(`tecnologia${posicion}`);
+        const inputCantidad = crearInput(`cantidad${posicion}`, 'Cantidad en Kg');
+
+        divInfo.innerHTML = '';
+
+        inputCantidad.setAttribute('type', 'number');
+        inputCantidad.setAttribute('min', '0.000');
+        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('required', '');
+
+        inputSap.classList.add('me-2');
+        inputSap.setAttribute('required', '');
+
+        inputDesc.classList.add('me-2');
+        inputDesc.setAttribute('required', '');
+        
+        selecTec.classList.add('me-2');
+
+        divInfo.append(inputSap);
+        divInfo.append(inputDesc);
+        divInfo.append(selecTec);
+        divInfo.append(inputCantidad);
     }
 
 };
@@ -147,10 +206,22 @@ const crearRegistroPasta = () => {
     const nueva = crearRadio(`nueva${cantidadPastas}`, `tipoPasta${cantidadPastas}`, 'Nueva pasta');
     const divInfo = crearDiv(`infoPasta${cantidadPastas}`);
     const btnEliminar = crearBtnBorrar(`eliminar${cantidadPastas}`);
+    const selecPasta = crearSelectorPastas(`sap${cantidadPastas}`);
+    const inputCantidad = crearInput(`cantidad${cantidadPastas}`, 'Cantidad en Kg');
+
+    inputCantidad.setAttribute('type', 'number');
+    inputCantidad.setAttribute('min', '0.000');
+    inputCantidad.setAttribute('step', '1');
+    inputCantidad.classList.add('ms-auto');
+    inputCantidad.classList.remove('w-100');
+    inputCantidad.classList.add('w-25');
+
+    selecPasta.classList.add('me-3');
 
     existente.radio.setAttribute('onclick', 'pastaExistente(this)');
-    nueva.radio.setAttribute('onclick', 'pastaNueva(this)');
-    
+    existente.radio.setAttribute('value', 'existente');
+    existente.radio.setAttribute('checked', '');
+
     divExistente.classList.add('form-check');
     divExistente.classList.add('mx-3');
     divExistente.classList.add('ms-auto');
@@ -160,6 +231,9 @@ const crearRegistroPasta = () => {
     divExistente.append(existente.radio);
     divExistente.append(existente.lblRadio);
 
+    nueva.radio.setAttribute('onclick', 'pastaNueva(this)');
+    nueva.radio.setAttribute('value', 'nueva');
+    
     divNueva.classList.add('form-check');
     divNueva.classList.add('mx-3');
     divNueva.classList.add('ms-auto');
@@ -175,6 +249,8 @@ const crearRegistroPasta = () => {
     divRadios.append(divNueva);
     divRadios.append(btnEliminar);
 
+    divInfo.append(selecPasta);
+    divInfo.append(inputCantidad);
     divInfo.classList.add('my-1');
     
     divPasta.classList.add('flex-column');
@@ -184,12 +260,47 @@ const crearRegistroPasta = () => {
     divPasta.append(divInfo);
     
     container.append(divPasta);
-
-    console.log(cantidadPastas);
 };
 
-const borrarRegistroPasta = (boton) => {
-    cantidadPastas -= 1;
+const borrarRegistroPasta = (elemento) => {
 
-    console.log(cantidadPastas);
+    const posicion = elemento.id[elemento.id.length - 1];
+    const divPasta = document.querySelector(`#divPasta${posicion}`);
+    divPasta.innerHTML = '';
+    divPasta.remove();
+
+    for(let i = parseInt(posicion) + 1; i <= cantidadPastas; i++){
+        let divId = `#divPasta${i}`;
+        let div = document.querySelector(divId);
+        for(let divElement of div.children){
+            let nuevoIdDiv = divElement.id.replace(i, i-1);
+            // console.log('id actual div', divElement.id)
+
+            for(let element of divElement.children){
+                let nuevoIdElement = element.id.replace(i, i-1);
+                // console.log('id actual elemento', element.id);
+
+                for(let subElement of element.children){
+                    if(subElement === null){
+                        continue;
+                    }else{
+                        let nuevoIdSub = subElement.id.replace(i, i-1);
+                        // console.log('id actual del subelemento', subElement.id);
+                        subElement.id = nuevoIdSub;
+                        // console.log('nuevo id del subelemento', subElement.id);
+                    }
+                }
+
+                element.id = nuevoIdElement;
+                // console.log('nuevo id elemento', element.id);
+            }
+
+            divElement.id = nuevoIdDiv;
+            // console.log('nuevo id div', divElement.id);
+        }
+
+        div.id = `divPasta${i-1}`
+    }
+
+    (cantidadPastas === 0) ? alert('Debe existir al menos una pasta') : cantidadPastas -= 1;
 };
