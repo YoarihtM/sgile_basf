@@ -45,7 +45,7 @@ export const nuevoColorRegistrado = async (req, res) => {
     .input('cod_sap', sql.VarChar, sapColor)
     .query(queries.getIdColor);
 
-    const idColor = colorAgregado.recordset[0];
+    const idColor = colorAgregado.recordset[0].id;
 
     await pool
     .request()
@@ -58,13 +58,13 @@ export const nuevoColorRegistrado = async (req, res) => {
     .input('bom', sql.VarChar(30), bom)
     .query(queries.getIdFormula);
 
-    const idFormula = formulaAgregada.recordset[0];
+    const idFormula = formulaAgregada.recordset[0].id;
 
     await pool
     .request()
-    .input('id_color', sql.Int, idColor)
+    .input('id_color', sql.Int, parseInt(idColor))
     .input('sap_color', sql.VarChar(20), sapColor)
-    .input('id_formula', sql.Int, idFormula)
+    .input('id_formula', sql.Int, parseInt(idFormula))
     .query(queries.addNewRelationColorFormula);
     
     for(let dato = 5; dato < datos.length - 1; dato++){
@@ -116,7 +116,7 @@ export const nuevoColorRegistrado = async (req, res) => {
 
         await pool
         .request()
-        .input('id_formula', sql.Int, idFormula)
+        .input('id_formula', sql.Int, parseInt(idFormula))
         .input('cod_sap', sql.VarChar(30), pasta.sap)
         .input('cantidad', sql.Float, parseFloat(pasta.cantidad))
         .query(queries.addNewRelationFormulaPaste);
