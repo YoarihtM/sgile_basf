@@ -109,7 +109,7 @@ const pastaExistente = (elemento) => {
 
         inputCantidad.setAttribute('type', 'number');
         inputCantidad.setAttribute('min', '0.000');
-        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('step', '0.001');
         inputCantidad.classList.remove('w-100');
         inputCantidad.classList.add('w-25');
         inputCantidad.classList.add('ms-auto');
@@ -126,7 +126,7 @@ const pastaExistente = (elemento) => {
         
         inputCantidad.setAttribute('type', 'number');
         inputCantidad.setAttribute('min', '0.000');
-        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('step', '0.001');
         inputCantidad.classList.remove('w-100');
         inputCantidad.classList.add('w-25');
         inputCantidad.classList.add('ms-auto');
@@ -152,7 +152,7 @@ const pastaNueva = (elemento) => {
 
         inputCantidad.setAttribute('type', 'number');
         inputCantidad.setAttribute('min', '0.000');
-        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('step', '0.001');
         inputCantidad.setAttribute('required', '');
         inputSap.classList.add('me-2');
         inputSap.setAttribute('required', '');
@@ -176,7 +176,7 @@ const pastaNueva = (elemento) => {
 
         inputCantidad.setAttribute('type', 'number');
         inputCantidad.setAttribute('min', '0.000');
-        inputCantidad.setAttribute('step', '1');
+        inputCantidad.setAttribute('step', '0.001');
         inputCantidad.setAttribute('required', '');
 
         inputSap.classList.add('me-2');
@@ -211,7 +211,7 @@ const crearRegistroPasta = () => {
 
     inputCantidad.setAttribute('type', 'number');
     inputCantidad.setAttribute('min', '0.000');
-    inputCantidad.setAttribute('step', '1');
+    inputCantidad.setAttribute('step', '0.001');
     inputCantidad.classList.add('ms-auto');
     inputCantidad.classList.remove('w-100');
     inputCantidad.classList.add('w-25');

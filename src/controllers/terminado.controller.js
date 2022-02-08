@@ -6,7 +6,6 @@ export const terminado = (req, res) => {
 };
 
 export const terminadoInicio = async (req, res) => {
-    console.log(req.user);
 
     const pool = await getConnection();
     const result = await pool.request().query(queries.getAllBatch);

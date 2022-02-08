@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { runOnChangeOnly } from 'nodemon/lib/config/defaults';
-import { formula, lotePasta, lotePastaBusqueda, nuevaFormula, nuevaPasta, nuevaPastaRegistrada, nuevoColor, nuevoColorRegistrado, nuevoLotePasta, nuevoLotePastaRegistrado } from '../controllers/formula.controller'
+import { formula, formulaColor, formulaColorBusqueda, lotePasta, lotePastaBusqueda, nuevaFormula, nuevaFormulaRegistrada, nuevaPasta, nuevaPastaRegistrada, nuevoColor, nuevoColorRegistrado, nuevoLotePasta, nuevoLotePastaRegistrado } from '../controllers/formula.controller'
 import { isLoggedIn } from '../lib/auth';
 
 const router = Router();
@@ -25,6 +25,14 @@ router.post('/formula/lotes-pasta', isLoggedIn, lotePastaBusqueda);
 
 router.get('/formula/nueva-formula', isLoggedIn, nuevaFormula);
 
-// router.put('/users', updtUserById);
+router.post('/formula/nueva-formula', isLoggedIn, nuevaFormulaRegistrada);
+
+router.get('/formula/formulas-color', isLoggedIn, formulaColor);
+
+router.post('/formula/formulas-color', isLoggedIn, formulaColorBusqueda);
+
+router.get('/formula/pastas-formula', isLoggedIn);
+
+router.post('/formula/pastas-formula', isLoggedIn);
 
 export default router;

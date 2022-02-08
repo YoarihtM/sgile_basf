@@ -35,6 +35,7 @@ export const queries = {
     getAllFormula: 'SELECT * FROM formula',
     addNewFormula: 'INSERT INTO formula (bom, comentario) VALUES (@bom, @comentario)',
     getIdFormula: 'SELECT id FROM formula WHERE bom = @bom',
+    getFormulaById: 'SELECT * FROM formula WHERE id = @id', 
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -43,6 +44,7 @@ export const queries = {
 // -------------------------------------------------------------------------------------------------------
 
     addNewRelationFormulaPaste: 'INSERT INTO pasta_formula (id_formula, cod_sap, cantidad) VALUES (@id_formula, @cod_sap, @cantidad)',
+    getAllFormulaRelatedByColor: 'SELECT id_formula FROM color_formula WHERE sap_color = @sap_color',
 
 // -------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,33 @@
+<%- include("../public/partials/header") -%>
+
+    <div class="row padding-row my-md-5 d-flex justify-content-center">
+        <div class="container col-11 rounded-3 p-3 m-0 bg-principal">
+            <div class="row m-0">
+                <div class="col">
+                    <h4 class="text-light text-center">Fórmulas registradas para el Color <%= sap %> </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-11 bg-light mb-5 d-flex border-principal rounded-3">
+
+            <% infoFormulas.forEach( formula => { %>
+
+                <div class="card m-3 border rounded-3">
+                    <div class="card-header bg-principal">
+                        <h5 class="text-light text-center">BOM: <%= formula.bom %> </h5>
+                    </div>
+                    <div class="card-body body-card-info">
+                        <h6>Comentarios</h6>
+                        <p class="card-text">
+                            <%= formula.comentario %>
+                        </p>
+                    </div>
+                </div>
+
+            <% }); %>
+
+        </div>
+    </div>
+
+<%- include("../public/partials/footer-formulaColor") -%>

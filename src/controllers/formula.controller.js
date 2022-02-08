@@ -7,14 +7,13 @@ export const formula = (req, res) => {
 };
 
 export const nuevoColor = async (req, res) => {
-    const origen = req.url;
 
     const pool = await getConnection();
     const result = await pool.request().query(queries.getAllPaste);
-    console.log(result.recordset);
 
     res.render('formulas/nuevo-color', {
-        sapCodes: result.recordset
+        sapCodes: result.recordset,
+        referer: req.headers.referer
     });
 };
 
@@ -30,7 +29,9 @@ export const nuevoColorRegistrado = async (req, res) => {
         descripcionColor,
         comentarioColor,
         bom,
-        comentarioBom
+        comentarioBom,
+        urlReferer
+
     } = req.body;
 
     await pool
@@ -113,7 +114,7 @@ export const nuevoColorRegistrado = async (req, res) => {
         .input('descripcion', sql.VarChar(30), pasta.descripcion)
         .input('tecnologia', sql.VarChar(30), pasta.tecnologia)
         .query(queries.addNewPaste);
-
+        
         await pool
         .request()
         .input('id_formula', sql.Int, parseInt(idFormula))
@@ -128,7 +129,7 @@ export const nuevoColorRegistrado = async (req, res) => {
             res.redirect('/formula/nuevo-color');
             break;
         }
-
+        
         await pool
         .request()
         .input('id_formula', sql.Int, idFormula)
@@ -139,7 +140,146 @@ export const nuevoColorRegistrado = async (req, res) => {
     }
 
     req.flash('success', 'Nuevo Color agregado exitosamente');
-    res.redirect('/formula/nuevo-color');
+
+    if(urlReferer == 'http://localhost:15000/formula/undefined'){
+        res.redirect('/formula/nuevo-color');
+    } else {
+        res.redirect(urlReferer);
+    }
+};
+
+export const nuevaFormula = async (req, res) => {
+
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllColor);
+    const result1 = await pool.request().query(queries.getAllPaste);
+
+    res.render('formulas/nueva-formula', {
+        colores: result.recordset,
+        sapCodes: result1.recordset,
+        referer: req.headers.referer
+    });
+};
+
+export const nuevaFormulaRegistrada = async (req, res) => {
+    const datos = Object.values(req.body);
+    const existentes = [];
+    const nuevas = [];
+
+    const pool = await getConnection();
+
+    const {
+        sapColor,
+        bom,
+        comentarioBom,
+        urlReferer
+    } = req.body;
+
+    const colorAgregado = await pool
+    .request()
+    .input('cod_sap', sql.VarChar, sapColor)
+    .query(queries.getIdColor);
+
+    const idColor = colorAgregado.recordset[0].id;
+
+    await pool
+    .request()
+    .input('bom', sql.VarChar(30), bom)
+    .input('comentario', sql.Text, comentarioBom)
+    .query(queries.addNewFormula);
+
+    const formulaAgregada = await pool
+    .request()
+    .input('bom', sql.VarChar(30), bom)
+    .query(queries.getIdFormula);
+
+    const idFormula = formulaAgregada.recordset[0].id;
+
+    await pool
+    .request()
+    .input('id_color', sql.Int, parseInt(idColor))
+    .input('sap_color', sql.VarChar(20), sapColor)
+    .input('id_formula', sql.Int, parseInt(idFormula))
+    .query(queries.addNewRelationColorFormula);
+
+    for(let dato = 3; dato < datos.length - 1; dato++){
+        if (datos[dato] == 'existente'){
+            existentes.push({
+                sap: datos[dato + 1],
+                cantidad: datos[dato + 2]
+            });
+        }else if (datos[dato] == 'nueva'){
+            nuevas.push({
+                sap: datos[dato + 1],
+                descripcion: datos[dato + 2],
+                tecnologia: datos[dato + 3],
+                cantidad: datos[dato + 4]
+            });
+        }else{
+            continue;
+        }
+    }
+
+    for(let pasta of nuevas){
+        if(pasta.tecnologia == 'Seleccione la tecnología'){
+            req.flash('message', `La nueva pasta con SAP "${pasta.sap}" no se le agregó el tipo de tecnología`);
+            res.redirect('/formula/nuevo-color');
+            break;
+        }else if(parseFloat(pasta.cantidad) == 0.0){
+            req.flash('message', `Todas las pastas registradas deben tener al menos 0.001 Kg. La pasta "${pasta.sap}" no se le agregó cantidad alguna`);
+            res.redirect('/formula/nuevo-color');
+            break;
+        }
+
+        const result = await pool
+        .request()
+        .input('cod_sap', sql.VarChar(30), pasta.sap)
+        .query(queries.getPasteBySAP);
+
+        if(result.recordset.length > 0){
+            req.flash('message', `La pasta "${pasta.sap}" ya existe`);
+            res.redirect('/formula/nuevo-color');
+            break;
+        }
+
+        await pool
+        .request()
+        .input('cod_sap', sql.VarChar(30), pasta.sap)
+        .input('descripcion', sql.VarChar(30), pasta.descripcion)
+        .input('tecnologia', sql.VarChar(30), pasta.tecnologia)
+        .query(queries.addNewPaste);
+        
+        await pool
+        .request()
+        .input('id_formula', sql.Int, parseInt(idFormula))
+        .input('cod_sap', sql.VarChar(30), pasta.sap)
+        .input('cantidad', sql.Float, parseFloat(pasta.cantidad))
+        .query(queries.addNewRelationFormulaPaste);
+    }
+
+    for(let pasta of existentes){
+        if(pasta.sap == 'Seleccione la Pasta'){
+            req.flash('message', 'No se seleccionó ninguna pasta existente, vuelve a intentar');
+            res.redirect('/formula/nuevo-color');
+            break;
+        }
+        
+        await pool
+        .request()
+        .input('id_formula', sql.Int, idFormula)
+        .input('cod_sap', sql.VarChar(30), pasta.sap)
+        .input('cantidad', sql.Float, parseFloat(pasta.cantidad))
+        .query(queries.addNewRelationFormulaPaste);
+
+    }
+
+    req.flash('success', 'Nueva Fórmula agregada exitosamente');
+
+    if(urlReferer == 'http://localhost:15000/formula/undefined'){
+        res.redirect('/formula/nuevo-color');
+    } else {
+        res.redirect(urlReferer);
+    }
 };
 
 export const nuevaPasta = (req, res) => {
@@ -327,6 +467,50 @@ export const lotePastaBusqueda = async (req, res) => {
 
 };
 
-export const nuevaFormula = async (req, res) => {
-    res.render('formulas/nueva-formula');
+export const formulaColor = async (req, res) => {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllColor);
+
+    res.render('formulas/ver-formulaColor', {
+        sapCodes: result.recordset
+    });
+}
+
+export const formulaColorBusqueda = async (req, res) => {
+
+    const {
+        sap
+    } = req.body;
+
+    if(sap == 'Seleccione el Color'){
+        req.flash('message', 'No se seleccionó ninguna pasta, vuelve a intentar');
+        res.redirect('/formula/formulas-color');
+    }else{
+        const pool = await getConnection();
+        const formulas = await pool
+        .request()
+        .input('sap_color', sql.VarChar(20), sap)
+        .query(queries.getAllFormulaRelatedByColor);
+
+        let infoFormulas = [];
+
+        for(let formula of formulas.recordset){
+            const result = await pool
+            .request()
+            .input('id', sql.Int, parseInt(formula.id_formula))
+            .query(queries.getFormulaById);
+
+            infoFormulas.push(result.recordset[0]);
+        }
+
+        res.render('formulas/formulaColor', {
+            infoFormulas: infoFormulas,
+            sap: sap
+        })
+    }
+};
+
+export const pastasFormula = async (req, res) => {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.getAllFormula);
 };
