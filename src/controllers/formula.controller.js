@@ -483,7 +483,7 @@ export const formulaColorBusqueda = async (req, res) => {
     } = req.body;
 
     if(sap == 'Seleccione el Color'){
-        req.flash('message', 'No se seleccionó ninguna pasta, vuelve a intentar');
+        req.flash('message', 'No se seleccionó ningún color, vuelve a intentar');
         res.redirect('/formula/formulas-color');
     }else{
         const pool = await getConnection();
@@ -513,4 +513,84 @@ export const formulaColorBusqueda = async (req, res) => {
 export const pastasFormula = async (req, res) => {
     const pool = await getConnection();
     const result = await pool.request().query(queries.getAllFormula);
+
+    res.render('formulas/ver-pastasFormula', {
+        boms: result.recordset
+    });
+};
+
+export const pastasFormulaBusqueda = async (req, res) => {
+    const {
+        bom     
+    } = req.body;
+
+    if(bom == 'Seleccione la BOM'){
+        req.flash('message', 'No se seleccionó ninguna BOM, vuelve a intentar');
+        res.redirect('/formula/pastas-formula');
+    } else {
+        
+        const pool = await getConnection();
+        const formula = await pool
+        .request()
+        .input('bom', sql.VarChar(30), bom)
+        .query(queries.getIdFormula)
+    
+        const id = parseInt(formula.recordset[0].id);
+    
+        const pastas = await pool
+        .request()
+        .input('id_formula', sql.Int, id)
+        .query(queries.getAllPastesRelatedByFormula);
+
+        const infoPastas = [];
+
+        for(let pasta of pastas.recordset){
+            const infoPasta = await pool 
+            .request()
+            .input('cod_sap', sql.VarChar(30), pasta.cod_sap)
+            .query(queries.getPasteBySAP);
+
+            infoPasta.recordset[0].cantidad = pasta.cantidad;
+
+            infoPastas.push(infoPasta.recordset[0]);
+        }
+    
+        res.render('formulas/pastasFormula', {
+            bom: bom,
+            infoPastas: infoPastas
+        });
+    }
+};  
+
+export const colorInfo = async (req, res) =>{
+    const pool = await getConnection();
+    const colores = await pool.request().query(queries.getAllColor);
+
+    res.render('formulas/ver-Color', {
+        colores: colores.recordset
+    })
+};
+
+export const colorInfoBusqueda = async (req, res) => {
+
+    const {
+        sap
+    } = req.body;
+
+    if(sap == 'Seleccione el Color'){
+        req.flash('message', 'No se seleccionó ningún color, vuelve a intentar');
+        res.redirect('/formula/color-info');
+    } else {
+        const pool = await getConnection();
+        const color = await pool
+        .request()
+        .input('cod_sap', sql.VarChar(20), sap)
+        .query(queries.getColorInfo);
+
+        res.render('formulas/color', {
+            colorInfo: color.recordset
+        })
+
+    }
+
 };

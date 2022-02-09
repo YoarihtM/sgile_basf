@@ -4,7 +4,7 @@
         <div class="container col-11 rounded-3 p-3 m-0 bg-principal">
             <div class="row m-0">
                 <div class="col">
-                    <h4 class="text-light text-center">Fórmulas registradas para el Color <%= sap %>
+                    <h4 class="text-light text-center">Pastas registradas para la Fórmula <%= bom %>
                     </h4>
                 </div>
             </div>
@@ -12,17 +12,25 @@
 
         <div class="col-11 bg-light mb-5 d-flex border-principal rounded-3 justify-content-center flex-wrap">
 
-            <% infoFormulas.forEach( formula=> { %>
+            <% infoPastas.forEach( pasta=> { %>
 
                 <div class="card m-3 border rounded-3 w-25">
                     <div class="card-header bg-principal">
-                        <h5 class="text-light text-center">BOM: <%= formula.bom %>
+                        <h5 class="text-light text-center">SAP: <%= pasta.cod_sap %>
                         </h5>
                     </div>
                     <div class="card-body body-card-info">
-                        <h6>Comentarios</h6>
+                        <h6>Descripción</h6>
                         <p class="card-text">
-                            <%= formula.comentario %>
+                            <%= pasta.descripcion %>
+                        </p>
+                        <h6>Tecnología</h6>
+                        <p class="card-text">
+                            <%= pasta.tecnologia %>
+                        </p>
+                        <h6>Cantidad</h6>
+                        <p class="card-text">
+                            <%= pasta.cantidad %> Kg
                         </p>
                     </div>
                 </div>

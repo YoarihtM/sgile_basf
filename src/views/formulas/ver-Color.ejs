@@ -32,16 +32,16 @@
 
         <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
 
-            <form action="/formula/pastas-formula" method="post" class="w-100 h-100">
+            <form action="/formula/color-info" method="post" class="w-100 h-100">
 
                 <div class="row d-flex align-self-center p-5">
                     <div class="col-12 d-flex flex-column" id="contenedor-principal">
-                        <h5 class="text-light text-center my-2">Datos de la Fórmula</h5>
+                        <h5 class="text-light text-center my-2">Datos del Color</h5>
                         <div class="form-group align-self-center d-flex w-100 my-3" id="divPasta">
-                            <select name="bom" class="form-select" aria-label="Seleccion de BOM" id="bom" required>
-                                <option selected >Seleccione la BOM</option>
-                                <% boms.forEach( function(bom) { %>
-                                    <option value="<%= bom.bom %>"><%= bom.bom %></option>
+                            <select name="sap" class="form-select" aria-label="Selección del color" id="sap" required>
+                                <option selected >Seleccione el Color </option>
+                                <% colores.forEach( function(color) { %>
+                                    <option value="<%= color.cod_sap %>"><%= color.cod_sap %></option>
                                 <% }); %>
                             </select>
                         </div>

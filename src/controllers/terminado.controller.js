@@ -8,9 +8,37 @@ export const terminado = (req, res) => {
 export const terminadoInicio = async (req, res) => {
 
     const pool = await getConnection();
-    const result = await pool.request().query(queries.getAllBatch);
+    const colores = await pool.request().query(queries.getAllColor);
+    const sapColores = [];
+    const formulasColores = {};
+
+    console.log(colores.recordset);
+
+    for(let color of colores.recordset){
+        sapColores.push(color.cod_sap);
+        const formulas = [];
+        const idFormula = await pool
+        .request()
+        .input('sap_color', sql.VarChar(20), color.cod_sap)
+        .query(queries.getAllFormulaRelatedByColor);
+
+        for(let formula of idFormula.recordset){
+
+            const infoFormula = await pool 
+            .request()
+            .input('id', sql.Int, parseInt(formula.id_formula))
+            .query(queries.getFormulaById);
+
+            formulas.push(infoFormula.recordset[0].bom);
+        }
+
+        formulasColores[color.cod_sap] = formulas;
+    }
     
-    res.render('done/terminado-inicio');
+    res.render('done/terminado-inicio', {
+        colores: sapColores,
+        formulas: formulasColores
+    });
 };
 
 export const terminadoFin = (req, res) => {

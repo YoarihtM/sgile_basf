@@ -4,25 +4,28 @@
         <div class="container col-11 rounded-3 p-3 m-0 bg-principal">
             <div class="row m-0">
                 <div class="col">
-                    <h4 class="text-light text-center">Fórmulas registradas para el Color <%= sap %>
-                    </h4>
+                    <h4 class="text-light text-center">Información del Color</h4>
                 </div>
             </div>
         </div>
 
         <div class="col-11 bg-light mb-5 d-flex border-principal rounded-3 justify-content-center flex-wrap">
 
-            <% infoFormulas.forEach( formula=> { %>
+            <% colorInfo.forEach( color => { %>
 
                 <div class="card m-3 border rounded-3 w-25">
                     <div class="card-header bg-principal">
-                        <h5 class="text-light text-center">BOM: <%= formula.bom %>
+                        <h5 class="text-light text-center">SAP: <%= color.cod_sap %>
                         </h5>
                     </div>
                     <div class="card-body body-card-info">
-                        <h6>Comentarios</h6>
+                        <h6>Descripción</h6>
                         <p class="card-text">
-                            <%= formula.comentario %>
+                            <%= color.descripcion %>
+                        </p>
+                        <h6>Comentario</h6>
+                        <p class="card-text">
+                            <%= color.comentario %>
                         </p>
                     </div>
                 </div>

@@ -1,6 +1,10 @@
 
 <%- include("../public/partials/header") -%>
 
+<script>
+    let formulasColores = <%- JSON.stringify(formulas) %>
+</script>
+
 <div class="row my-md-5 padding-row d-flex justify-content-center align-content-center">
 
     <% if(message !='' ){ %>
@@ -32,9 +36,20 @@
     <% } %>
 
     <div class="col-11 d-flex align-self-center justify-content-center bg-principal h-100 col-ppal-middle-row">
-        <form action="/terminado/inicio-evaluacion" method="post" class="w-100 h-100 d-flex justify-content-center">
-            <h5 class="text-light text-center my-3">Información del Lote</h5>
-            
+        <form action="/terminado/inicio-evaluacion" method="post" class="w-100 h-100">
+            <h5 class="text-light text-center my-3">Información del Color</h5>
+            <div class="form-group align-self-center d-flex flex-column w-100 my-3" id="divColor">
+                <select name="sapColor" class="form-select" aria-label="Selección del color" id="sapColor" onchange="obtenerSapColor(this)" required>
+                    <option selected >Seleccione un Color existente</option>
+                    <% colores.forEach( function(color) { %>
+                        <option value="<%= color %>"><%= color %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <p class="text-center text-light">Sí no encuentra el color, regístrelo como nuevo color</p>
+            <div class="form-group d-flex flex-column justify-content-center my-3">
+                <a href="/formula/nuevo-color" class="btn btn-opcion bg-principal w-25 ms-auto me-auto">Nuevo Color</a>
+            </div>
 
         </form>
     </div>
