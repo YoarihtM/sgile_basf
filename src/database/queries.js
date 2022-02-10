@@ -10,7 +10,7 @@ export const queries = {
 // -------------------------------------------------------------------------------------------------------
 
     getAllColor: 'SELECT * FROM color',
-    addNewColor: 'INSERT INTO color (cod_sap, descripcion, comentario) VALUES (@cod_sap, @descripcion, @comentario)',
+    addNewColor: 'INSERT INTO color (cod_sap, descripcion, tipo, comentario) VALUES (@cod_sap, @descripcion, @tipo, @comentario)',
     getIdColor: 'SELECT id FROM color WHERE cod_sap = @cod_sap',
     getColorInfo: 'SELECT * FROM color WHERE cod_sap = @cod_sap',
 

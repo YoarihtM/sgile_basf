@@ -12,8 +12,6 @@ export const terminadoInicio = async (req, res) => {
     const sapColores = [];
     const formulasColores = {};
 
-    console.log(colores.recordset);
-
     for(let color of colores.recordset){
         sapColores.push(color.cod_sap);
         const formulas = [];
@@ -32,13 +30,35 @@ export const terminadoInicio = async (req, res) => {
             formulas.push(infoFormula.recordset[0].bom);
         }
 
-        formulasColores[color.cod_sap] = formulas;
+        formulasColores[color.cod_sap] = {
+            idColor: color.id,
+            formulas: formulas
+        };
     }
     
     res.render('done/terminado-inicio', {
         colores: sapColores,
         formulas: formulasColores
     });
+};
+
+export const terminadoInicioRegistrado = (req, res) => {
+
+    const {
+        lote,
+        idColor,
+        sapColor,
+        cliente,
+        descripcion,
+        tecnologia,
+        tamano,
+        contenedor,
+        comentarioLote,
+        
+    } = req.body;
+
+
+    res.json(req.body);
 };
 
 export const terminadoFin = (req, res) => {
