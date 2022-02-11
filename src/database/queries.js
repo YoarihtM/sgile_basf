@@ -51,8 +51,13 @@ export const queries = {
 // -------------------------------------------------------------------------------------------------------
 
     getAllBatch: 'SELECT * FROM lote',
-    getBatchById: 'SELECT * FROM lote WHERE cod_lote = @cod_lote',
-    addNewBatch: 'INSERT INTO lote (cod_lot, id_color, cod_sap_color, descripcion, tecnologia, tam_lote, contenedor, comentario) VALUES (@cod_lot, @id_color, @cod_sap_color, @descripcion, @tecnologia, @tam_lote, @contenedor, @comentario)',
+    getBatchByCode: 'SELECT * FROM lote WHERE cod_lote = @cod_lote',
+    getBatchIdByCode: 'SELECT id FROM lote WHERE cod_lote = @cod_lote',
+    addNewBatch: 'INSERT INTO lote (cod_lote, id_color, cod_sap_color, cliente, descripcion, tecnologia, tam_lote, contenedor, comentario) VALUES (@cod_lote, @id_color, @cod_sap_color, @cliente, @descripcion, @tecnologia, @tam_lote, @contenedor, @comentario)',
+
+// -------------------------------------------------------------------------------------------------------
+
+    addNewDoneEvaluation: 'INSERT INTO inicio_eval_terminado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
 
 // -------------------------------------------------------------------------------------------------------
     
