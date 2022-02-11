@@ -107,6 +107,66 @@ export const terminadoInicioRegistrado = async (req, res) => {
     }
 };
 
-export const terminadoFin = (req, res) => {
-    res.render('done/terminado-fin')
+export const terminadoFin = async (req, res) => {
+
+    res.render('done/terminado-fin');
+
 }
+
+export const terminadoFinRegistrado = async (req, res) => {
+
+    const {
+        lote,
+        idUsuario,
+        numEmpleado,
+        fechaHora,
+        comentarioEvTerm
+    } = req.body;
+
+    const pool = await getConnection();
+    const existeInicio = await pool 
+    .request()
+    .input('cod_lote', sql.VarChar(30), lote)
+    .query(queries.getDoneEvaluation);
+
+    const inicio = existeInicio.recordset;
+
+    if( inicio.length > 0 ){
+
+        const existeFin = await pool 
+        .request()
+        .input('cod_lote', sql.VarChar(30), lote)
+        .query(queries.getEndDoneEvaluation);
+
+        const fin = existeFin.recordset;
+
+        if( fin.length > 0){
+            req.flash('message', 'El Lote ya ha sido registrado en Fin de Evaluación de Terminado');
+            res.redirect('/terminado/fin-evaluacion');
+        }else{
+
+            await pool
+            .request()
+            .input('id_usuario', sql.Int, parseInt(idUsuario))
+            .input('num_empleado', sql.VarChar(15), numEmpleado)
+            .input('id_lote', sql.Int, parseInt(inicio[0].id_lote))
+            .input('cod_lote', sql.VarChar(30), lote)
+            .input('fecha', sql.VarChar(30), fechaHora)
+            .input('comentario', sql.Text, comentarioEvTerm)
+            .query(queries.addNewEndDoneEvaluation);
+
+            req.flash('success', 'El Fin de Evaluación de Terminado se ha registrado exitosamente');
+            res.redirect('/terminado/fin-evaluacion');
+
+        }
+
+    }else{
+        req.flash('message', 'El Lote no se ha registrado y no existe ningún Inicio de Evaluación de Terminado');
+        res.redirect('/terminado/fin-evaluacion');
+    }
+
+};
+
+export const terminadoRegistros = (req, res) => {
+    res.render('done/terminado-registros')
+};

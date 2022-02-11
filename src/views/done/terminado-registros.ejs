@@ -1,0 +1,39 @@
+
+<%- include("../public/partials/header") -%>
+
+<div class="row my-md-5 padding-row d-flex justify-content-center align-content-center">
+
+    <% if(message !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        <%= message %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <% if(success !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        <%= success %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="col-11 d-flex align-self-center justify-content-center bg-principal h-100 col-ppal-middle-row">
+        
+    </div>
+</div>
+
+<%- include("../public/partials/footer-done") -%>

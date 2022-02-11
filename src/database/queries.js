@@ -58,6 +58,10 @@ export const queries = {
 // -------------------------------------------------------------------------------------------------------
 
     addNewDoneEvaluation: 'INSERT INTO inicio_eval_terminado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    getDoneEvaluation: 'SELECT * FROM inicio_eval_terminado WHERE cod_lote = @cod_lote',
+    addNewEndDoneEvaluation: 'INSERT INTO fin_eval_terminado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    getEndDoneEvaluation: 'SELECT * FROM fin_eval_terminado WHERE cod_lote = @cod_lote',
+
 
 // -------------------------------------------------------------------------------------------------------
     
