@@ -1,7 +1,5 @@
-
 <%- include("../public/partials/header") -%>
-
-<div class="row my-md-5 padding-row d-flex justify-content-center align-content-center">
+<div class="row my-md-5 middle-row-3">
 
     <% if(message !='' ){ %>
         <div class="container p-4 m-0">
@@ -31,11 +29,24 @@
         </div>
     <% } %>
 
-    <div class="col-11 d-flex align-self-center justify-content-center bg-principal h-100 col-ppal-middle-row">
+    <div class="col-md-6 col-sm-12 d-flex flex-column">
+        <a href="/calidad/calidad-inicio" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar ingreso a Control de Calidad</a>
         
-        
+        <a href="/calidad/entonado-fin" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar egreso de Entonado</a>
 
+        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar nueva Prueba al Lote</a>
+
+    </div>
+    <div class="col-md-6 col-sm-12 d-flex flex-column">
+        <a href="/calidad/calidad-fin" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar egreso de Control de Calidad</a>
+
+        <a href="" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar nueva Adición al Lote</a>
     </div>
 </div>
 
-<%- include("../public/partials/footer-done") -%>
+<%- include("../public/partials/footer") -%>

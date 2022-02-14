@@ -1,17 +1,18 @@
 import { Router } from 'express';
 import { runOnChangeOnly } from 'nodemon/lib/config/defaults';
-import { getUsers, createNewUser, getUserById, deleteUser, updtUserById } from '../controllers/users.controller'
+import { calidad, calidadFin, calidadFinRegistrado, calidadInicio, calidadInicioRegistrado } from '../controllers/calidad.controller';
+import { isLoggedIn, isNotLoggedIn } from '../lib/auth';
 
 const router = Router();
 
-router.get('/users', getUsers);
+router.get('/calidad', isLoggedIn, calidad);
 
-router.post('/users', createNewUser);
+router.get('/calidad/calidad-inicio', isLoggedIn, calidadInicio);
 
-router.get('/users/:num_empleado', getUserById);
+router.post('/calidad/calidad-inicio', isLoggedIn, calidadInicioRegistrado);
 
-router.delete('/users/:num_empleado', deleteUser);
+router.get('/calidad/calidad-fin', isLoggedIn, calidadFin);
 
-// router.put('/users', updtUserById);
+router.post('/calidad/calidad-fin', isLoggedIn, calidadFinRegistrado);
 
 export default router;

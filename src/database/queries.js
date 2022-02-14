@@ -62,6 +62,17 @@ export const queries = {
     addNewEndDoneEvaluation: 'INSERT INTO fin_eval_terminado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
     getEndDoneEvaluation: 'SELECT * FROM fin_eval_terminado WHERE cod_lote = @cod_lote',
 
+// -------------------------------------------------------------------------------------------------------
+
+    addNewQualityStart: 'INSERT INTO inicio_calidad (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    addNewQualityEnd: 'INSERT INTO fin_calidad (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    getQualityStartByBatch: 'SELECT * FROM inicio_calidad WHERE cod_lote = @cod_lote',
+    getQualityEndByBatch: 'SELECT * FROM fin_calidad WHERE cod_lote = @cod_lote',
+    
+    addNewTintingStart: 'INSERT INTO inicio_entonado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    addNewTintingEnd: 'INSERT INTO fin_entonado (id_usuario, num_empleado, id_lote, cod_lote, fecha, comentario) VALUES (@id_usuario, @num_empleado, @id_lote, @cod_lote, @fecha, @comentario)',
+    getTintingStartByBatch: 'SELECT * FROM inicio_entonado WHERE cod_lote = @cod_lote',
+    getTintingEndByBatch: 'SELECT * FROM fin_entonado WHERE cod_lote = @cod_lote',
 
 // -------------------------------------------------------------------------------------------------------
     
