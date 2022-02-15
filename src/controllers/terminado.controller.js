@@ -167,6 +167,42 @@ export const terminadoFinRegistrado = async (req, res) => {
 
 };
 
-export const terminadoRegistros = (req, res) => {
-    res.render('done/terminado-registros')
+export const terminadoRegistros = async (req, res) => {
+
+    const pool = await getConnection();
+    const lotes = await pool.request().query(queries.getAllBatch);
+    const lotesInfo = {};
+    const codLotes = [];
+
+    for(let lote of lotes.recordset){
+
+        let inicio = '';
+        let fin= '';
+
+        const evalTermInicio = await pool
+        .request()
+        .input('cod_lote', sql.VarChar(30), lote.cod_lote)
+        .query(queries.getDoneEvaluation);
+
+        const evalTermFin = await pool
+        .request()
+        .input('cod_lote', sql.VarChar(30), lote.cod_lote)
+        .query(queries.getEndDoneEvaluation);
+
+        evalTermInicio.recordset.length > 0 ? inicio = evalTermInicio.recordset[0].fecha : inicio = '';
+        evalTermFin.recordset.length > 0 ? fin = evalTermFin.recordset[0].fecha : fin = '';
+
+        codLotes.push(lote.cod_lote);
+        
+        lotesInfo[lote.cod_lote] = {
+            fechaInicio: inicio,
+            fechaFin: fin
+        }
+        
+    }
+    
+    res.render('done/terminado-registros', {
+        lotesInfo,
+        codLotes
+    })
 };

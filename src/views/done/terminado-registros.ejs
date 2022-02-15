@@ -31,11 +31,34 @@
         </div>
     <% } %>
 
-    <div class="col-11 d-flex align-self-center justify-content-center bg-principal h-100 col-ppal-middle-row">
-        
-        
+    <div class="col-11 mb-5 d-flex rounded-3 justify-content-center flex-wrap">
+
+        <% codLotes.forEach( codLote => { 
+            let fechaFin = '', fechaInicio = '';
+            
+            lotesInfo[codLote].fechaInicio == '' ? fechaInicio = 'Lote aún no Iniciado en Evaluación de Terminado' : fechaInicio = new Date(lotesInfo[codLote].fechaInicio);
+            lotesInfo[codLote].fechaFin == '' ? fechaFin = 'Lote aún no Finalizado en Evaluación de Terminado' : fechaFin = new Date(lotesInfo[codLote].fechaFin); 
+            
+            let fechaInicioSplit = fechaInicio.toString().split('GMT');
+            let fechaFinSplit = fechaFin.toString().split('GMT');
+            
+            %>
+            
+            <div class="card m-3 rounded-3 w-100">
+                <div class="card-header bg-principal">
+                    <h5 class="text-light text-center"><%= codLote %></h5>
+                </div>
+                <div class="card-body body-card-info">
+                    <p class="card-text text-center"> <strong> Inicio de Evaluación de Terminado: </strong> <%= fechaInicioSplit[0] %> </p>
+                    <p class="card-text text-center"> <strong> Fin de Evaluación de Terminado: </strong> <%= fechaFinSplit[0] %> </p>
+                </div>
+    
+            </div>
+    
+            <% }); %>
 
     </div>
+
 </div>
 
 <%- include("../public/partials/footer-done") -%>
