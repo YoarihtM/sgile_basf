@@ -1,25 +1,80 @@
 <%- include("../public/partials/header") -%>
 
-<% if(user.tipo_usuario == 1){ %>
-    <div class="row my-md-5 middle-row-3">
-        <div class="col-md-6 col-sm-12 d-flex flex-column">
-            <a href="usuarios/crear-administrador" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Administrador</a>
-            <a href="usuarios/crear-moderador" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Moderador</a>
-        </div>
-        <div class="col-md-6 col-sm-12 d-flex flex-column">
-            <a href="usuarios/crear-acceso_limitado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Acceso Restringido</a>
-            <a href="usuarios/crear-solo_vista" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Solo Vista</a>
-        </div>
-    </div>
-<% } else if(user.tipo_usuario == 2){ %>
-    <div class="row my-md-5 middle-row-4">
-        <div class="col-md-6 col-sm-12 d-flex flex-column">
-            <a href="usuarios/crear-acceso_limitado" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Acceso Restringido</a>
-        </div>
-        <div class="col-md-6 col-sm-12 d-flex flex-column">
-            <a href="usuarios/crear-solo_vista" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center" type="button">Crear Usuario de Solo Vista</a>
-        </div>
-    </div>
-<% } %>
+<div class="row my-md-5 middle-row-2 d-flex justify-content-center">
 
+    <% if(message !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        <%= message %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <% if(success !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+                        <%= success %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
+        <form action="/nuevo-usuario" method="post" class="w-100 h-100">
+            <div class="row d-flex align-self center p-5">
+                <div class="col-6 d-flex flex-column">
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="nombre" id="nombre" placeholder="Nombre" type="text" class="form-control input-lg" autofocus required>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="apPaterno" id="apPaterno" placeholder="Apellido Paterno" type="text" class="form-control w-100" required>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="apMaterno" id="apMaterno" placeholder="Apellido Materno" type="text" class="form-control w-100" required>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="numEmpleado" id="numEmpleado" placeholder="Número de Empleado" type="text" class="form-control w-100" required>
+                    </div>
+                </div>
+                <div class="col-6 d-flex flex-column">
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="departamento" id="departamento" placeholder="Departamento" type="text" class="form-control w-100" required>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="email" id="email" placeholder="Correo" type="email" class="form-control w-100" required>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <select name="tipoUsuario" id="tipoUsuario" class="form-select" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
+                            <option selected >Tipo de Usuario </option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Moderador</option>
+                            <option value="3">Acceso Limitado</option>
+                            <option value="4">Solo Vista</option>
+                        </select>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <input name="telefono" id="telefono" placeholder="Telefono" type="text" class="form-control w-100" required>
+                    </div>
+                </div>
+                <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                    <button class="btn btn-opcion bg-principal w-100" onclick="infoUsuario()">Registrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script type="module" src="../JS/scripts/descargarUsuario.js"></script>
 <%- include("../public/partials/footer") -%>

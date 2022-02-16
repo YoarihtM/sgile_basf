@@ -1,14 +1,11 @@
 import { Router } from 'express';
-import { getAllAdds, getAllAddsFin } from '../controllers/adicion.controller';
+import { solicitudAdicion, solicitudAdicionRegistrada } from '../controllers/adicion.controller';
+import { isLoggedIn, isNotLoggedIn } from '../lib/auth';
 
 const router = Router();
 
-router.get('/inicio-adicion', getAllAdds);
+router.get('/calidad/solicitud-adicion', isLoggedIn, solicitudAdicion);
 
-router.get('/fin-adicion', getAllAddsFin);
-
-router.post('/adicion');
-
-router.get('/adicion/:id');
+router.post('/calidad/solicitud-adicion', isLoggedIn, solicitudAdicionRegistrada);
 
 export default router;

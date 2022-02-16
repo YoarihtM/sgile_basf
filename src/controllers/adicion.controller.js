@@ -1,41 +1,27 @@
 import { getConnection, sql, queries } from '../database'
 
-export const getAllAdds = async (req, res) => {
 
-    try {
-        
-        const pool = await getConnection();
-        const result = await pool
-        .request()
-        .query(queries.getAllAdds)
+export const solicitudAdicion = async (req, res) => {
 
-        res.json(result.recordset);
+    const pool = await getConnection();
+    const pastas = await pool.request().query(queries.getAllPaste);
 
-    } catch (error) {
-
-        res.status(500);
-        res.send(error.message);
-
-    }
+    res.render('quality/solicitudAdicion', {
+        sapCodes: pastas.recordset
+    });
 
 };
 
-export const getAllAddsFin = async (req, res) => {
+export const solicitudAdicionRegistrada = async (req, res) => {
 
-    try {
-        
-        const pool = await getConnection();
-        const result = await pool
-        .request()
-        .query(queries.getAllAddsFin)
+    const datos = Object.values(req.body);
+    const existentes = [];
+    const nuevas = [];
 
-        res.json(result.recordset);
+    const pool = await getConnection();
 
-    } catch (error) {
+    
 
-        res.status(500);
-        res.send(error.message);
-
-    }
+    res.json(req.body);
 
 };

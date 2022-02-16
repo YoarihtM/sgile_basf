@@ -1,0 +1,48 @@
+<%- include("../public/partials/header") -%>
+<div class="row my-md-5 middle-row-2">
+
+    <% if(message !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        <%= message %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <% if(success !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+                        <%= success %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="col-md-6 col-sm-12 d-flex flex-column">
+        <a href="/formula/nuevo-pigmento/pasta" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+            type="button">Registrar nueva Pasta</a>
+        
+        <a href="/formula/nuevo-pigmento/mica" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+        type="button">Registrar nueva Mica</a>
+
+
+    </div>
+    <div class="col-md-6 col-sm-12 d-flex flex-column">
+        <a href="/formula/nuevo-pigmento/aluminio" class="btn btn-secondary btn-task my-md-3 my-3 py-4 align-self-center"
+        type="button">Registrar nueva Aluminio</a>
+        
+    </div>
+</div>
+
+<%- include("../public/partials/footer-formula") -%>

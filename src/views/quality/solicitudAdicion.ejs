@@ -1,0 +1,94 @@
+<%- include("../public/partials/header") -%>
+
+<div class="row my-md-5 padding-row d-flex justify-content-center align-content-center">
+
+    <script>
+        let info = <%- JSON.stringify(sapCodes) %>
+    </script>
+
+    <% if(message !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                        <%= message %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <% if(success !='' ){ %>
+        <div class="container p-4 m-0">
+            <div class="row m-0">
+                <div class="col">
+                    <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
+                        <%= success %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Cerrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="col-11 d-flex align-self-center justify-content-center bg-principal h-100 col-ppal-middle-row">
+        <form action="/calidad/solicitud-adicion" method="post" class="w-100 h-100 m-3">
+            <h5 class="text-light text-center my-3">Información del Lote</h5>
+            <div class="form-group d-flex justify-content-evenly my-3">
+                <input type="text" class="form-control mx-2" name="lote" id="lote" placeholder="Lote" required>
+            </div>
+            
+            <div id="contenedor-principal" class="my-3">
+
+                <h5 class="text-light text-center my-2">Pigmentos a Adicionar</h5>
+                <div class="form-group align-self-center justify-content-center d-flex w-100 my-3">
+                    <button type="button" class="btn btn-opcion bg-principal w-25" id="agregarPasta" onclick="crearRegistroPasta()">Agregar Pigmento</button>
+                </div>
+                <div class="form-group align-self-center d-flex w-100 my-3 justify-content-center flex-column" id="divPasta">
+                    <div class="d-flex justify-content-around w-100 align-self-center my-1" id="radios">
+                        <div class="form-check mx-3">
+                            <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaExistente(this)" id="existente" value="existente" checked>
+                            <label for="existente" class="form-check-label text-light">
+                                Pigmento existente
+                            </label>
+                        </div>
+                        <div class="form-check mx-3">
+                            <input type="radio" name="tipoPasta" class="form-check-input" onclick="pastaNueva(this)" id="nueva" value="nueva">
+                            <label for="nueva" class="form-check-label text-light">
+                                Nuevo Pigmento
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center w-100 align-self-center my-1" id="infoPasta">
+                        <select name="sap" class="form-select me-3" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
+                            <option selected >Seleccione la Pasta </option>
+                            <% sapCodes.forEach( function(sapCode) { %>
+                                <option value="<%= sapCode.cod_sap %>"><%= sapCode.cod_sap %></option>
+                            <% }); %>
+                        </select>
+                        <input name="cantidad" placeholder="Cantidad en Kg" type="number" min="0.000" step="0.001" class="form-control w-25 ms-auto" required>
+                    </div>
+                </div>
+            </div>
+            
+            <h5 class="text-light text-center my-3">Información del Registro</h5>
+            <input type="text" name="idUsuario" id="idUsuario" hidden value="<%= user.id %>">
+            <input type="text" class="form-control mb-1" name="numEmpleado" id="numEmpleado" value="<%= user.num_empleado %>" hidden>
+            <div class="form-group d-flex flex-column justify-content-center my-3">
+                <label class="form-label text-light mx-2" for="usuario">Colaborador que registra</label>
+                <input type="text" class="form-control mb-1" id="usuario" placeholder="<%= user.nombre + ' ' + user.ap_paterno + ' ' + user.ap_materno %>" disabled>
+            </div>
+            <div class="form-group align-self-center d-flex w-100 my-3">
+                <textarea class="form-control" name="comentario" id="comentario" placeholder="Comentarios de Evaluación de Terminado" rows="3"></textarea>
+            </div>
+            <div class="form-group align-self-center d-flex w-100 my-3">
+                <button class="btn btn-opcion bg-principal w-100 mx-2" type="submit">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("../public/partials/footer-calidad") -%>

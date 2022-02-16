@@ -54,6 +54,7 @@ const crearSelectorTecnologia = (id) => {
     const selectedOption = crearOpcion('Seleccione la tecnología');
     const baseAgua = crearOpcion('Base Agua');
     const baseSolvente = crearOpcion('Base Solvente');
+    const na = crearOpcion('No Aplica');
     
     select.classList.add('form-select');
     select.classList.add('me-2');
@@ -63,6 +64,28 @@ const crearSelectorTecnologia = (id) => {
     select.add(selectedOption, 0);
     select.add(baseAgua, 1);
     select.add(baseSolvente, 2);
+    select.add(na, 3);
+    selectedOption.selected = true;
+    
+    return select;
+};
+
+crearSelectorTipo = (id) => {
+    const select = document.createElement('select');
+    const selectedOption = crearOpcion('Seleccione el tipo');
+    const aluminio = crearOpcion('Aluminio');
+    const mica = crearOpcion('Mica');
+    const pasta = crearOpcion('Pasta');
+    
+    select.classList.add('form-select');
+    select.classList.add('me-2');
+    select.ariaLabel = 'Seleccion de tecnología';
+    select.id = id;
+    select.setAttribute('name', id);
+    select.add(selectedOption, 0);
+    select.add(aluminio, 1);
+    select.add(mica, 2);
+    select.add(pasta, 3);
     selectedOption.selected = true;
     
     return select;
@@ -149,6 +172,7 @@ const pastaNueva = (elemento) => {
         const inputDesc = crearInput('descripcion', 'Descripción');
         const selecTec = crearSelectorTecnologia('tecnologia');
         const inputCantidad = crearInput(`cantidad`, 'Cantidad en Kg');
+        const selecTipo = crearSelectorTipo('tipo');
 
         inputCantidad.setAttribute('type', 'number');
         inputCantidad.setAttribute('min', '0.000');
@@ -161,7 +185,8 @@ const pastaNueva = (elemento) => {
         selecTec.classList.add('me-2');
 
         containerInfoPasta.append(inputSap);
-        containerInfoPasta.append(inputDesc);
+        containerInfoPasta.append(inputDesc)
+        containerInfoPasta.append(selecTipo);;
         containerInfoPasta.append(selecTec);
         containerInfoPasta.append(inputCantidad);
     }else{
@@ -170,6 +195,7 @@ const pastaNueva = (elemento) => {
         const inputSap = crearInput(`sap${posicion}`, 'Código SAP de la pasta');
         const inputDesc = crearInput(`descripcion${posicion}`, 'Descripción');
         const selecTec = crearSelectorTecnologia(`tecnologia${posicion}`);
+        const selecTipo = crearSelectorTipo(`tipo${posicion}`);
         const inputCantidad = crearInput(`cantidad${posicion}`, 'Cantidad en Kg');
 
         divInfo.innerHTML = '';
@@ -189,6 +215,7 @@ const pastaNueva = (elemento) => {
 
         divInfo.append(inputSap);
         divInfo.append(inputDesc);
+        divInfo.append(selecTipo);
         divInfo.append(selecTec);
         divInfo.append(inputCantidad);
     }
@@ -203,7 +230,7 @@ const crearRegistroPasta = () => {
     const existente = crearRadio(`existente${cantidadPastas}`, `tipoPasta${cantidadPastas}`, 'Pasta existente');
     const divExistente = crearDiv(`divExistente${cantidadPastas}`);
     const divNueva = crearDiv(`divNueva${cantidadPastas}`);
-    const nueva = crearRadio(`nueva${cantidadPastas}`, `tipoPasta${cantidadPastas}`, 'Nueva pasta');
+    const nueva = crearRadio(`nueva${cantidadPastas}`, `tipoPasta${cantidadPastas}`, 'Nuevo Pigmento');
     const divInfo = crearDiv(`infoPasta${cantidadPastas}`);
     const btnEliminar = crearBtnBorrar(`eliminar${cantidadPastas}`);
     const selecPasta = crearSelectorPastas(`sap${cantidadPastas}`);

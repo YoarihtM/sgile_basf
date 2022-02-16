@@ -32,23 +32,32 @@
 
         <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
 
-            <form action="/formula/nueva-pasta" method="post" class="w-100 h-100">
+            <form action="/formula/nuevo-pigmento" method="post" class="w-100 h-100">
 
                 <div class="row d-flex align-self-center p-5">
                     <div class="col-12 d-flex flex-column" id="contenedor-principal">
-                        <h5 class="text-light text-center my-2">Datos de la Pasta</h5>
+                        <h5 class="text-light text-center my-2">Datos del Pigmento</h5>
                         <div class="form-group align-self-center d-flex w-100 my-3" id="divPasta">
                             <input name="sap" placeholder="Código SAP de la pasta" type="text" class="form-control w-100" id="sap" required>
                             <input name="descripcion" placeholder="Descripcion" type="text" class="form-control w-100 mx-2" id="descripcion" required>
+                            <select name="tipo" class="form-select me-2" aria-label="Seleccion de tecnologia" id="tipo" required>
+
+                                <option selected >Seleccione el tipo de Pigmento</option>
+                                <option value="Aluminio">Aluminio</option>
+                                <option value="Mica">Mica</option>
+                                <option value="Pasta">Pasta</option>
+
+                            </select>
                             <select name="tecnologia" class="form-select" aria-label="Seleccion de tecnologia" id="tecnologia" required>
 
                                 <option selected >Seleccione la tecnología </option>
                                 <option value="Base Agua">Base Agua</option>
                                 <option value="Base Solvente">Base Solvente</option>
+                                <option value="No Aplica">No Aplica</option>
 
                             </select>
                         </div>
-                        <h5 class="text-light text-center my-2">Datos del Lote de la Pasta</h5>
+                        <h5 class="text-light text-center my-2">Datos del Lote del Pigmento</h5>
                         <div class="form-group align-self-center d-flex w-100 my-3">
                             <input name="lote" placeholder="Lote de la Pasta" type="text" class="form-control w-100" id="lote" required>
                         </div>

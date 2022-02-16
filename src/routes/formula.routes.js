@@ -11,9 +11,9 @@ router.get('/formula/nuevo-color', isLoggedIn, nuevoColor);
 
 router.post('/formula/nuevo-color', isLoggedIn, nuevoColorRegistrado);
 
-router.get('/formula/nueva-pasta', isLoggedIn, nuevaPasta);
+router.get('/formula/nuevo-pigmento', isLoggedIn, nuevaPasta);
 
-router.post('/formula/nueva-pasta', isLoggedIn, nuevaPastaRegistrada);
+router.post('/formula/nuevo-pigmento', isLoggedIn, nuevaPastaRegistrada);
 
 router.get('/formula/nuevo-lote-pasta', isLoggedIn, nuevoLotePasta);
 

@@ -12,20 +12,20 @@ export const terminadoInicio = async (req, res) => {
     const sapColores = [];
     const formulasColores = {};
 
-    for(let color of colores.recordset){
+    for (let color of colores.recordset) {
         sapColores.push(color.cod_sap);
         const formulas = [];
         const idFormula = await pool
-        .request()
-        .input('sap_color', sql.VarChar(20), color.cod_sap)
-        .query(queries.getAllFormulaRelatedByColor);
-
-        for(let formula of idFormula.recordset){
-
-            const infoFormula = await pool 
             .request()
-            .input('id', sql.Int, parseInt(formula.id_formula))
-            .query(queries.getFormulaById);
+            .input('sap_color', sql.VarChar(20), color.cod_sap)
+            .query(queries.getAllFormulaRelatedByColor);
+
+        for (let formula of idFormula.recordset) {
+
+            const infoFormula = await pool
+                .request()
+                .input('id', sql.Int, parseInt(formula.id_formula))
+                .query(queries.getFormulaById);
 
             formulas.push(infoFormula.recordset[0].bom);
         }
@@ -35,7 +35,7 @@ export const terminadoInicio = async (req, res) => {
             formulas: formulas
         };
     }
-    
+
     res.render('done/terminado-inicio', {
         colores: sapColores,
         formulas: formulasColores
@@ -62,44 +62,44 @@ export const terminadoInicioRegistrado = async (req, res) => {
 
     const pool = await getConnection();
     const loteExist = await pool
-    .request()
-    .input('cod_lote', sql.VarChar(30), lote)
-    .query(queries.getBatchByCode)
+        .request()
+        .input('cod_lote', sql.VarChar(30), lote)
+        .query(queries.getBatchByCode)
 
-    if(loteExist.recordset.length > 0){
+    if (loteExist.recordset.length > 0) {
         req.flash('message', 'El lote que se está intentando registrar ya existe, vuelve a intentar');
         res.redirect('/terminado/inicio-evaluacion');
-    }else{
+    } else {
 
         await pool
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote)
-        .input('id_color', sql.Int, idColor)
-        .input('cod_sap_color', sql.VarChar(20), sapColor)
-        .input('cliente', sql.VarChar(50), cliente)
-        .input('descripcion', sql.VarChar(50), descripcion)
-        .input('tecnologia', sql.VarChar(30), tecnologia)
-        .input('tam_lote', sql.Float, parseFloat(tamano))
-        .input('contenedor', sql.VarChar(20), contenedor)
-        .input('comentario', sql.Text, comentarioLote)
-        .query(queries.addNewBatch);
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .input('id_color', sql.Int, idColor)
+            .input('cod_sap_color', sql.VarChar(20), sapColor)
+            .input('cliente', sql.VarChar(50), cliente)
+            .input('descripcion', sql.VarChar(50), descripcion)
+            .input('tecnologia', sql.VarChar(30), tecnologia)
+            .input('tam_lote', sql.Float, parseFloat(tamano))
+            .input('contenedor', sql.VarChar(20), contenedor)
+            .input('comentario', sql.Text, comentarioLote)
+            .query(queries.addNewBatch);
 
         const idLoteConsult = await pool
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote)
-        .query(queries.getBatchIdByCode);
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .query(queries.getBatchIdByCode);
 
         const idLote = idLoteConsult.recordset[0].id;
 
         await pool
-        .request()
-        .input('id_usuario', sql.Int, parseInt(idUsuario))
-        .input('num_empleado', sql.VarChar(15), numEmpleado)
-        .input('id_lote', sql.Int, parseInt(idLote))
-        .input('cod_lote', sql.VarChar(30), lote)
-        .input('fecha', sql.VarChar(30), fechaHora)
-        .input('comentario', sql.Text, comentarioEvTerm)
-        .query(queries.addNewDoneEvaluation);
+            .request()
+            .input('id_usuario', sql.Int, parseInt(idUsuario))
+            .input('num_empleado', sql.VarChar(15), numEmpleado)
+            .input('id_lote', sql.Int, parseInt(idLote))
+            .input('cod_lote', sql.VarChar(30), lote)
+            .input('fecha', sql.VarChar(30), fechaHora)
+            .input('comentario', sql.Text, comentarioEvTerm)
+            .query(queries.addNewDoneEvaluation);
 
         req.flash('success', 'El inicio de la Evaluación de Terminado se ha registrado exitosamente');
         res.redirect('/terminado/inicio-evaluacion');
@@ -124,43 +124,43 @@ export const terminadoFinRegistrado = async (req, res) => {
     } = req.body;
 
     const pool = await getConnection();
-    const existeInicio = await pool 
-    .request()
-    .input('cod_lote', sql.VarChar(30), lote)
-    .query(queries.getDoneEvaluation);
+    const existeInicio = await pool
+        .request()
+        .input('cod_lote', sql.VarChar(30), lote)
+        .query(queries.getDoneEvaluation);
 
     const inicio = existeInicio.recordset;
 
-    if( inicio.length > 0 ){
+    if (inicio.length > 0) {
 
-        const existeFin = await pool 
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote)
-        .query(queries.getEndDoneEvaluation);
+        const existeFin = await pool
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .query(queries.getEndDoneEvaluation);
 
         const fin = existeFin.recordset;
 
-        if( fin.length > 0){
+        if (fin.length > 0) {
             req.flash('message', 'El Lote ya ha sido registrado en Fin de Evaluación de Terminado');
             res.redirect('/terminado/fin-evaluacion');
-        }else{
+        } else {
 
             await pool
-            .request()
-            .input('id_usuario', sql.Int, parseInt(idUsuario))
-            .input('num_empleado', sql.VarChar(15), numEmpleado)
-            .input('id_lote', sql.Int, parseInt(inicio[0].id_lote))
-            .input('cod_lote', sql.VarChar(30), lote)
-            .input('fecha', sql.VarChar(30), fechaHora)
-            .input('comentario', sql.Text, comentarioEvTerm)
-            .query(queries.addNewEndDoneEvaluation);
+                .request()
+                .input('id_usuario', sql.Int, parseInt(idUsuario))
+                .input('num_empleado', sql.VarChar(15), numEmpleado)
+                .input('id_lote', sql.Int, parseInt(inicio[0].id_lote))
+                .input('cod_lote', sql.VarChar(30), lote)
+                .input('fecha', sql.VarChar(30), fechaHora)
+                .input('comentario', sql.Text, comentarioEvTerm)
+                .query(queries.addNewEndDoneEvaluation);
 
             req.flash('success', 'El Fin de Evaluación de Terminado se ha registrado exitosamente');
             res.redirect('/terminado/fin-evaluacion');
 
         }
 
-    }else{
+    } else {
         req.flash('message', 'El Lote no se ha registrado y no existe ningún Inicio de Evaluación de Terminado');
         res.redirect('/terminado/fin-evaluacion');
     }
@@ -174,33 +174,33 @@ export const terminadoRegistros = async (req, res) => {
     const lotesInfo = {};
     const codLotes = [];
 
-    for(let lote of lotes.recordset){
+    for (let lote of lotes.recordset) {
 
         let inicio = '';
-        let fin= '';
+        let fin = '';
 
         const evalTermInicio = await pool
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote.cod_lote)
-        .query(queries.getDoneEvaluation);
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote.cod_lote)
+            .query(queries.getDoneEvaluation);
 
         const evalTermFin = await pool
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote.cod_lote)
-        .query(queries.getEndDoneEvaluation);
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote.cod_lote)
+            .query(queries.getEndDoneEvaluation);
 
         evalTermInicio.recordset.length > 0 ? inicio = evalTermInicio.recordset[0].fecha : inicio = '';
         evalTermFin.recordset.length > 0 ? fin = evalTermFin.recordset[0].fecha : fin = '';
 
         codLotes.push(lote.cod_lote);
-        
+
         lotesInfo[lote.cod_lote] = {
             fechaInicio: inicio,
             fechaFin: fin
         }
-        
+
     }
-    
+
     res.render('done/terminado-registros', {
         lotesInfo,
         codLotes

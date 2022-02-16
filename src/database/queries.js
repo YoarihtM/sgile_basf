@@ -1,7 +1,7 @@
 export const queries = {
 
     getAllAdds: 'SELECT * FROM inicio_adicion',
-    addNewAdds: 'INSERT INTO inicio_adicion (id, id_usuario, num_empleado, id_lote, cod_lote, pasta, cantidad, comentario) VALUES (@id, @id_usuario, @num_empleado, @id_lote, @cod_lote, @pasta, @cantidad, @comentario)',
+    addNewAdds: 'INSERT INTO inicio_adicion (id, id_usuario, num_empleado, id_lote, cod_lote, pigmento, cantidad, comentario) VALUES (@id, @id_usuario, @num_empleado, @id_lote, @cod_lote, @pigmento, @cantidad, @comentario)',
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -16,20 +16,20 @@ export const queries = {
 
 // -------------------------------------------------------------------------------------------------------
 
-    getAllPaste: 'SELECT cod_sap FROM pasta',
-    addNewPaste: 'INSERT INTO pasta (cod_sap, descripcion, tecnologia) VALUES (@cod_sap, @descripcion, @tecnologia)',
-    getPasteBySAP: 'SELECT * FROM pasta WHERE cod_sap = @cod_sap',
+    getAllPaste: 'SELECT cod_sap FROM pigmento',
+    addNewPaste: 'INSERT INTO pigmento (cod_sap, descripcion, tecnologia, tipo) VALUES (@cod_sap, @descripcion, @tecnologia, @tipo)',
+    getPasteBySAP: 'SELECT * FROM pigmento WHERE cod_sap = @cod_sap',
 
 // -------------------------------------------------------------------------------------------------------
 
-    addNewPasteBatch: 'INSERT INTO lote_pasta (cod_lote, comentario) VALUES (@cod_lote, @comentario)',
-    getPasteBatchById: 'SELECT * FROM lote_pasta WHERE id = @id',
-    getPasteBatchByCode: 'SELECT * FROM lote_pasta WHERE cod_lote = @cod_lote',
+    addNewPasteBatch: 'INSERT INTO lote_pigmento (cod_lote, comentario) VALUES (@cod_lote, @comentario)',
+    getPasteBatchById: 'SELECT * FROM lote_pigmento WHERE id = @id',
+    getPasteBatchByCode: 'SELECT * FROM lote_pigmento WHERE cod_lote = @cod_lote',
 
 // -------------------------------------------------------------------------------------------------------
 
-    addNewRelationPasteBatch: 'INSERT INTO pasta_lote_pasta (cod_sap, id_lote) VALUES (@cod_sap, @id_lote)',
-    getBatchesRelatedBySap: 'SELECT id_lote FROM pasta_lote_pasta WHERE cod_sap = @cod_sap',
+    addNewRelationPasteBatch: 'INSERT INTO pigmento_lote_pigmento (cod_sap, id_lote) VALUES (@cod_sap, @id_lote)',
+    getBatchesRelatedBySap: 'SELECT id_lote FROM pigmento_lote_pigmento WHERE cod_sap = @cod_sap',
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -44,9 +44,9 @@ export const queries = {
 
 // -------------------------------------------------------------------------------------------------------
 
-    addNewRelationFormulaPaste: 'INSERT INTO pasta_formula (id_formula, cod_sap, cantidad) VALUES (@id_formula, @cod_sap, @cantidad)',
+    addNewRelationFormulaPaste: 'INSERT INTO pigmento_formula (id_formula, cod_sap, cantidad) VALUES (@id_formula, @cod_sap, @cantidad)',
     getAllFormulaRelatedByColor: 'SELECT id_formula FROM color_formula WHERE sap_color = @sap_color',
-    getAllPastesRelatedByFormula: 'SELECT * FROM pasta_formula WHERE id_formula = @id_formula',
+    getAllPastesRelatedByFormula: 'SELECT * FROM pigmento_formula WHERE id_formula = @id_formula',
 
 // -------------------------------------------------------------------------------------------------------
 

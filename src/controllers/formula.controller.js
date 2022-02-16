@@ -85,8 +85,9 @@ export const nuevoColorRegistrado = async (req, res) => {
                     nuevas.push({
                         sap: datos[dato + 1],
                         descripcion: datos[dato + 2],
-                        tecnologia: datos[dato + 3],
-                        cantidad: datos[dato + 4]
+                        tipo: datos[dato + 3],
+                        tecnologia: datos[dato + 4],
+                        cantidad: datos[dato + 5]
                     });
                 }else{
                     continue;
@@ -120,6 +121,7 @@ export const nuevoColorRegistrado = async (req, res) => {
                 .input('cod_sap', sql.VarChar(30), pasta.sap)
                 .input('descripcion', sql.VarChar(30), pasta.descripcion)
                 .input('tecnologia', sql.VarChar(30), pasta.tecnologia)
+                .input('tipo', sql.VarChar(30), pasta.tipo)
                 .query(queries.addNewPaste);
                 
                 await pool
@@ -221,8 +223,9 @@ export const nuevaFormulaRegistrada = async (req, res) => {
             nuevas.push({
                 sap: datos[dato + 1],
                 descripcion: datos[dato + 2],
-                tecnologia: datos[dato + 3],
-                cantidad: datos[dato + 4]
+                tipo: datos[dato + 3],
+                tecnologia: datos[dato + 4],
+                cantidad: datos[dato + 5]
             });
         }else{
             continue;
@@ -236,6 +239,10 @@ export const nuevaFormulaRegistrada = async (req, res) => {
             break;
         }else if(parseFloat(pasta.cantidad) == 0.0){
             req.flash('message', `Todas las pastas registradas deben tener al menos 0.001 Kg. La pasta "${pasta.sap}" no se le agregó cantidad alguna`);
+            res.redirect('/formula/nuevo-color');
+            break;
+        }else if(pasta.tipo == 'Seleccione el tipo'){
+            req.flash('message', `La nueva pasta con SAP "${pasta.sap}" no se le agregó el tipo de pigmento`);
             res.redirect('/formula/nuevo-color');
             break;
         }
@@ -256,6 +263,7 @@ export const nuevaFormulaRegistrada = async (req, res) => {
         .input('cod_sap', sql.VarChar(30), pasta.sap)
         .input('descripcion', sql.VarChar(30), pasta.descripcion)
         .input('tecnologia', sql.VarChar(30), pasta.tecnologia)
+        .input('tipo', sql.VarChar(30), pasta.tipo)
         .query(queries.addNewPaste);
         
         await pool
@@ -292,7 +300,7 @@ export const nuevaFormulaRegistrada = async (req, res) => {
 };
 
 export const nuevaPasta = (req, res) => {
-    res.render('formulas/nueva-pasta')
+    res.render('formulas/nuevo-pigmento')
 };
 
 export const nuevaPastaRegistrada = async (req, res) => {
@@ -300,13 +308,14 @@ export const nuevaPastaRegistrada = async (req, res) => {
         sap,
         descripcion,
         tecnologia,
+        tipo,
         lote,
         comentarioLote
     } = req.body;
 
     if(tecnologia == 'Seleccione la tecnología'){
         req.flash('message', 'No se seleccionó la tecnología, vuelve a intentar');
-        res.redirect('/formula/nueva-pasta');
+        res.redirect('/formula/nuevo-pigmento');
     }else{
         const pool = await getConnection();
         const result = await pool
@@ -321,10 +330,10 @@ export const nuevaPastaRegistrada = async (req, res) => {
         
         if(result.recordset.length > 0){
             req.flash('message', '¡El SAP introducido ya existe!');
-            res.redirect('/formula/nueva-pasta');
+            res.redirect('/formula/nuevo-pigmento');
         }else if(result1.recordset.length > 0){
             req.flash('message', '¡El Lote introducido ya existe!');
-            res.redirect('/formula/nueva-pasta');
+            res.redirect('/formula/nuevo-pigmento');
         }else{
     
             try {
@@ -333,6 +342,7 @@ export const nuevaPastaRegistrada = async (req, res) => {
                 .input('cod_sap', sql.VarChar(30), sap)
                 .input('descripcion', sql.VarChar(50), descripcion)
                 .input('tecnologia', sql.VarChar(30), tecnologia)
+                .input('tipo', sql.VarChar(30), tipo)
                 .query(queries.addNewPaste);
                 
                 await pool
@@ -355,7 +365,7 @@ export const nuevaPastaRegistrada = async (req, res) => {
                 .query(queries.addNewRelationPasteBatch);
                 
                 req.flash('success', 'Nueva Pasta agregada exitosamente');
-                res.redirect('/formula/nueva-pasta');
+                res.redirect('/formula/nuevo-pigmento');
                 
             } catch (error) {
                 res.status(500);
