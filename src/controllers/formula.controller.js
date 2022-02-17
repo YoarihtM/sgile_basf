@@ -27,7 +27,7 @@ export const nuevoColorRegistrado = async (req, res) => {
     const {
         sapColor,
         descripcionColor,
-        tipo,
+        tipoColor,
         comentarioColor,
         bom,
         comentarioBom,
@@ -35,7 +35,7 @@ export const nuevoColorRegistrado = async (req, res) => {
 
     } = req.body;
 
-    if(tipo == 'Seleccione el tipo'){
+    if(tipoColor == 'Seleccione el tipo'){
         req.flash('message', 'No se seleccionó el tipo');
         res.redirect('/formula/nuevo-color');
     } else {
@@ -44,7 +44,7 @@ export const nuevoColorRegistrado = async (req, res) => {
             .request()
             .input('cod_sap', sql.VarChar(20), sapColor)
             .input('descripcion', sql.VarChar(50), descripcionColor)
-            .input('tipo', sql.VarChar(30), tipo)
+            .input('tipo', sql.VarChar(30), tipoColor)
             .input('comentario', sql.Text, comentarioColor)
             .query(queries.addNewColor);
         

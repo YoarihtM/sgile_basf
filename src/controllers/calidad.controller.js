@@ -21,51 +21,51 @@ export const calidadInicioRegistrado = async (req, res) => {
     const pool = await getConnection();
 
     const terminadoRegistrado = await pool
-    .request()
-    .input('cod_lote', sql.VarChar(30), lote)
-    .query(queries.getEndDoneEvaluation);
-
-    if(terminadoRegistrado.recordset.length > 0){
-        const existe = await pool 
         .request()
         .input('cod_lote', sql.VarChar(30), lote)
-        .query(queries.getQualityStartByBatch);
+        .query(queries.getEndDoneEvaluation);
 
-        const existeEnt = await pool 
-        .request()
-        .input('cod_lote', sql.VarChar(30), lote)
-        .query(queries.getTintingStartByBatch);
+    if (terminadoRegistrado.recordset.length > 0) {
+        const existe = await pool
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .query(queries.getQualityStartByBatch);
 
-        if(existe.recordset.length > 0 && existeEnt.recordset.length > 0){
+        const existeEnt = await pool
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .query(queries.getTintingStartByBatch);
+
+        if (existe.recordset.length > 0 && existeEnt.recordset.length > 0) {
             req.flash('message', 'El Lote ya ha sido iniciado en Control de Calidad y en Entonado');
             res.redirect('/calidad/calidad-inicio');
-        }else{
+        } else {
 
             await pool
-            .request()
-            .input('id_usuario', sql.Int, parseInt(idUsuario))
-            .input('num_empleado', sql.VarChar(15), numEmpleado)
-            .input('id_lote', sql.Int, parseInt(terminadoRegistrado.recordset[0].id_lote))
-            .input('cod_lote', sql.VarChar(30), lote)
-            .input('fecha', sql.VarChar(30), fechaHora)
-            .input('comentario', sql.Text, comentario)
-            .query(queries.addNewQualityStart);
+                .request()
+                .input('id_usuario', sql.Int, parseInt(idUsuario))
+                .input('num_empleado', sql.VarChar(15), numEmpleado)
+                .input('id_lote', sql.Int, parseInt(terminadoRegistrado.recordset[0].id_lote))
+                .input('cod_lote', sql.VarChar(30), lote)
+                .input('fecha', sql.VarChar(30), fechaHora)
+                .input('comentario', sql.Text, comentario)
+                .query(queries.addNewQualityStart);
 
             await pool
-            .request()
-            .input('id_usuario', sql.Int, parseInt(idUsuario))
-            .input('num_empleado', sql.VarChar(15), numEmpleado)
-            .input('id_lote', sql.Int, parseInt(terminadoRegistrado.recordset[0].id_lote))
-            .input('cod_lote', sql.VarChar(30), lote)
-            .input('fecha', sql.VarChar(30), fechaHora)
-            .input('comentario', sql.Text, comentario)
-            .query(queries.addNewTintingStart);
+                .request()
+                .input('id_usuario', sql.Int, parseInt(idUsuario))
+                .input('num_empleado', sql.VarChar(15), numEmpleado)
+                .input('id_lote', sql.Int, parseInt(terminadoRegistrado.recordset[0].id_lote))
+                .input('cod_lote', sql.VarChar(30), lote)
+                .input('fecha', sql.VarChar(30), fechaHora)
+                .input('comentario', sql.Text, comentario)
+                .query(queries.addNewTintingStart);
 
             req.flash('success', 'El Lote se ha iniciado satisfactoriamente en Control de Calidad y Entonado');
             res.redirect('/calidad/calidad-inicio');
         }
 
-    }else{
+    } else {
         req.flash('message', 'El Lote ingresado aún no ha finalizado su Evaluación de Terminado');
         res.redirect('/calidad/calidad-inicio');
     }
@@ -89,37 +89,37 @@ export const calidadFinRegistrado = async (req, res) => {
     const pool = await getConnection();
 
     const entonadoRegistrado = await pool
-    .request()
-    .input('cod_lote', sql.VarChar(30), lote)
-    .query(queries.getTintingEndByBatch);
-
-
-    if(entonadoRegistrado.recordset.length > 0){
-        const existe = await pool 
         .request()
         .input('cod_lote', sql.VarChar(30), lote)
-        .query(queries.getQualityEndByBatch);
+        .query(queries.getTintingEndByBatch);
 
-        if(existe.recordset.length > 0){
+
+    if (entonadoRegistrado.recordset.length > 0) {
+        const existe = await pool
+            .request()
+            .input('cod_lote', sql.VarChar(30), lote)
+            .query(queries.getQualityEndByBatch);
+
+        if (existe.recordset.length > 0) {
             req.flash('message', 'El Lote ya ha terminado su proceso en Control de Calidad');
             res.redirect('/calidad/calidad-fin');
-        }else{
+        } else {
 
             await pool
-            .request()
-            .input('id_usuario', sql.Int, parseInt(idUsuario))
-            .input('num_empleado', sql.VarChar(15), numEmpleado)
-            .input('id_lote', sql.Int, parseInt(entonadoRegistrado.recordset[0].id_lote))
-            .input('cod_lote', sql.VarChar(30), lote)
-            .input('fecha', sql.VarChar(30), fechaHora)
-            .input('comentario', sql.Text, comentario)
-            .query(queries.addNewQualityEnd);
+                .request()
+                .input('id_usuario', sql.Int, parseInt(idUsuario))
+                .input('num_empleado', sql.VarChar(15), numEmpleado)
+                .input('id_lote', sql.Int, parseInt(entonadoRegistrado.recordset[0].id_lote))
+                .input('cod_lote', sql.VarChar(30), lote)
+                .input('fecha', sql.VarChar(30), fechaHora)
+                .input('comentario', sql.Text, comentario)
+                .query(queries.addNewQualityEnd);
 
             req.flash('success', 'El Lote ha finalizado su proceso satisfactoriamente en Control de Calidad y Entonado');
             res.redirect('/calidad/calidad-fin');
         }
 
-    }else{
+    } else {
         req.flash('message', 'El Lote ingresado aún no ha finalizado su proceso en Entonado');
         res.redirect('/calidad/calidad-fin');
     }

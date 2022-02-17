@@ -1,4 +1,4 @@
-import jsPDF from '../JS/jspdf/dist/jspdf.umd.min.js';
+import jsPDF from '../jspdf';
 
 const infoUsuario = () => {
     const nombre = document.querySelector('#nombre');

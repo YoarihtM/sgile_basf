@@ -8,15 +8,15 @@ POST {{users}}
 Content-Type: application/json
 
 {
-    "num_empleado": "5",
-    "nombre": "Irvin Yoariht",
-    "ap_paterno": "Macedo",
-    "ap_materno": "Cruz",
-    "departamento": "Entonado",
-    "tipo_usuario": 3,
-    "email": "irvin.macedo25@hotmail.com",
-    "contrasena": "Yoariht1",
-    "telefono": "5516369353",
+    "num_empleado": "36120911",
+    "nombre": "Edgar",
+    "ap_paterno": "Moran",
+    "ap_materno": "Lazcano",
+    "departamento": "Calidad",
+    "tipo_usuario": 1,
+    "email": "edgar-alexis.moran@basf.com",
+    "contrasena": "2684",
+    "telefono": "",
     "img_perfil": null
 }
 
