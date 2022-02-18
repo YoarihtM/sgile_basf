@@ -32,25 +32,37 @@
     <% } %>
 
     <div class="col-11 mb-5 d-flex rounded-3 justify-content-center flex-wrap">
-
-        <% 
-        
-
-
-        %>
             
             <div class="card m-3 rounded-3 w-100">
                 <div class="card-header bg-principal">
-                    <h5 class="text-light text-center">Lote <%= loteInfo[0].cod_lote del Color %> </h5>
+                    <h5 class="text-light text-center">Información del Lote</h5>
                 </div>
                 <div class="card-body body-card-info">
-                    <p class="card-text text-center"> <strong> Inicio de Evaluación de Terminado: </strong> <%= fechaInicioSplit[0] %> </p>
-                    <p class="card-text text-center"> <strong> Fin de Evaluación de Terminado: </strong> <%= fechaFinSplit[0] %> </p>
+                    <p class="card-text text-center">
+                        <strong>Lote:</strong> <%= loteInfo[0].cod_lote %>
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Color:</strong> <%= loteInfo[0].cod_sap_color %>
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Cliente:</strong> <%= loteInfo[0].cliente %>
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Descripción:</strong> <%= loteInfo[0].descripcion %>
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Tecnologia:</strong> <%= loteInfo[0].tecnologia %>
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Tamaño del Lote:</strong> <%= loteInfo[0].tam_lote %> KG
+                    </p>
+                    <p class="card-text text-center">
+                        <strong>Tecnologia:</strong> <%= loteInfo[0].tecnologia %>
+                    </p>
                 </div>
     
             </div>
-    
-            <% }); %>
+
 
     </div>
 
