@@ -30,6 +30,8 @@
         </div>
     <% } %>
 
+    <% if(user.tipo_usuario == 1){ %>
+
     <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
         <form action="/nuevo-usuario" method="post" class="w-100 h-100">
             <div class="row d-flex align-self center p-5">
@@ -73,6 +75,52 @@
             </div>
         </form>
     </div>
+
+    <% } else if (user.tipo_usuario == 2) { %>
+
+        <div class="col-11 d-flex align-self center bg-principal h-100 col-ppal-middle-row">
+            <form action="/nuevo-usuario" method="post" class="w-100 h-100">
+                <div class="row d-flex align-self center p-5">
+                    <div class="col-6 d-flex flex-column">
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="nombre" id="nombre" placeholder="Nombre" type="text" class="form-control input-lg" autofocus required>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="apPaterno" id="apPaterno" placeholder="Apellido Paterno" type="text" class="form-control w-100" required>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="apMaterno" id="apMaterno" placeholder="Apellido Materno" type="text" class="form-control w-100" required>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="numEmpleado" id="numEmpleado" placeholder="Número de Empleado" type="text" class="form-control w-100" required>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex flex-column">
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="departamento" id="departamento" placeholder="Departamento" type="text" class="form-control w-100" required>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="email" id="email" placeholder="Correo" type="email" class="form-control w-100" required>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <select name="tipoUsuario" id="tipoUsuario" class="form-select" aria-label="Seleccion de tecnologia" id="sap" onselect="data(this)" required>
+                                <option selected >Tipo de Usuario </option>
+                                <option value="3">Acceso Limitado</option>
+                                <option value="4">Solo Vista</option>
+                            </select>
+                        </div>
+                        <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                            <input name="telefono" id="telefono" placeholder="Telefono" type="text" class="form-control w-100" required>
+                        </div>
+                    </div>
+                    <div class="form-group my-2 align-self-center d-flex w-100 my-3">
+                        <button class="btn btn-opcion bg-principal w-100" onclick="infoUsuario()">Registrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+    <% } %>
 </div>
 
 <script type="module" src="../JS/scripts/descargarUsuario.js"></script>

@@ -1,3 +1,0 @@
-@adicion = http://localhost:15000/inicio-adicion
-
-GET {{adicion}}

@@ -7,12 +7,10 @@ export const newUserCreated = async (userData) => {
     const pool = await getConnection();
     const result = await pool
     .request()
-    .input('id', userData.tipo_usuario)
+    .input('id', userData.tipoUsuario)
     .query(queries.getUserType);
 
     const tipoUsuario = result.recordset[0].nombre;
-
-    const rutaImg = '../views/public/img/logo.png';
 
     doc.setFontSize(24);
     doc.setFont('Helvetica');
@@ -22,7 +20,7 @@ export const newUserCreated = async (userData) => {
     doc.setFont('times');
     doc.setFontSize(12);
 
-    let msj = 'El usuario ' + userData.nombre + ' ' + userData.ap_paterno + ' ' + userData.ap_materno + ' con No. de empleado ' + userData.num_empleado + ' ha sido creado con éxito.';
+    let msj = 'El usuario ' + userData.nombre + ' ' + userData.apPaterno + ' ' + userData.apMaterno + ' con No. de empleado ' + userData.numEmpleado + ' ha sido creado con éxito.';
     
     doc.text(msj, 15, 30, {
         align: 'justify'
@@ -44,7 +42,7 @@ export const newUserCreated = async (userData) => {
 
     doc.text(msj, 30, 55);
 
-    const nombreDoc = userData.nombre + userData.num_empleado + '.pdf'
+    const nombreDoc = userData.nombre + userData.numEmpleado + '.pdf'
 
     doc.save(nombreDoc);
 

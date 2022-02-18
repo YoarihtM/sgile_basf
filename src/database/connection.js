@@ -3,7 +3,7 @@ import sql from 'mssql';
 const dbSettings = {
     user: 'admin',
     password: 'root2021',
-    server: 'localhost', //Propiedad server es la IP, si se habla de la instancia se pone DESKTOP-48GPRD5
+    server: '127.0.0.1', //Propiedad server es la IP, si se habla de la instancia se pone DESKTOP-48GPRD5
     database: 'control_calidad',
     // Opciones de conexion para desarrollo
     // Se evita hacer la conexion mediante SSL y para ello se usan las lineas de abajo

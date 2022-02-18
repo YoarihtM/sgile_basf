@@ -33,73 +33,76 @@
 
     <div class="col-11 mb-5 d-flex rounded-3 justify-content-center flex-wrap">
             
+        <% lotes.forEach( lote => { %>
+
             <div class="card m-3 rounded-3 w-100">
                 <div class="card-header bg-principal">
                     <h5 class="text-light text-center">Información del Lote</h5>
                 </div>
                 <div class="card-body body-card-info">
                     <p class="card-text text-center">
-                        <strong>Lote:</strong> <%= loteInfo[0].cod_lote %>
+                        <strong>Lote:</strong> <%= infoLotes[lote].loteInfo.cod_lote %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Color:</strong> <%= loteInfo[0].cod_sap_color %>
+                        <strong>Color:</strong> <%= infoLotes[lote].loteInfo.cod_sap_color %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>BOM o Fórmula:</strong> <%= loteInfo[0].bom %>
+                        <strong>BOM o Fórmula:</strong> <%= infoLotes[lote].loteInfo.bom %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Cliente:</strong> <%= loteInfo[0].cliente %>
+                        <strong>Cliente:</strong> <%= infoLotes[lote].loteInfo.cliente %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Descripción:</strong> <%= loteInfo[0].descripcion %>
+                        <strong>Descripción:</strong> <%= infoLotes[lote].loteInfo.descripcion %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Tecnologia:</strong> <%= loteInfo[0].tecnologia %>
+                        <strong>Tecnologia:</strong> <%= infoLotes[lote].loteInfo.tecnologia %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Tamaño del Lote:</strong> <%= loteInfo[0].tam_lote %> KG
+                        <strong>Tamaño del Lote:</strong> <%= infoLotes[lote].loteInfo.tam_lote %> KG
                     </p>
                     <p class="card-text text-center">
-                        <strong>Tecnologia:</strong> <%= loteInfo[0].tecnologia %>
+                        <strong>Tecnologia:</strong> <%= infoLotes[lote].loteInfo.tecnologia %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Inicio de Evaluación de Terminado:</strong> <% 
                         let info = '';
-                        evalTerminado.length > 0? info = evalTerminado[0].fecha.split('T')[0] + ' a las ' + evalTerminado[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso de Evaluación de Terminado' %>
+                        infoLotes[lote].evalTerminado.length > 0? info = infoLotes[lote].evalTerminado[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].evalTerminado[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso de Evaluación de Terminado' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Inicio de Evaluación de Terminado:</strong> <% 
-                        evalTerminadoFin.length > 0? info = evalTerminadoFin[0].fecha.split('T')[0] + ' a las ' + evalTerminadoFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso de Evaluación de Terminado' %>
+                        infoLotes[lote].evalTerminadoFin.length > 0? info = infoLotes[lote].evalTerminadoFin[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].evalTerminadoFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso de Evaluación de Terminado' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Inicio en Control de Calidad:</strong> <% 
-                        calidad.length > 0? info = calidad[0].fecha.split('T')[0] + ' a las ' + calidad[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso en Control de Calidad' %>
+                        infoLotes[lote].calidad.length > 0? info = infoLotes[lote].calidad[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].calidad[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso en Control de Calidad' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Inicio de Entonado:</strong> <% 
-                        entonado.length > 0? info = entonado[0].fecha.split('T')[0] + ' a las ' + entonado[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso de Entonado' %>
+                        infoLotes[lote].entonado.length > 0? info = infoLotes[lote].entonado[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].entonado[0].fecha.split('T')[1] : info = 'No se ha iniciado el proceso de Entonado' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Fin de Entonado:</strong> <% 
-                        entonadoFin.length > 0? info = entonadoFin[0].fecha.split('T')[0] + ' a las ' + entonadoFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso de Entonado' %>
+                        infoLotes[lote].entonadoFin.length > 0? info = infoLotes[lote].entonadoFin[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].entonadoFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso de Entonado' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
                         <strong>Fin en Control de Calidad :</strong> <% 
-                        calidadFin.length > 0? info = calidadFin[0].fecha.split('T')[0] + ' a las ' + calidadFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso en Control de Calidad' %>
+                        infoLotes[lote].calidadFin.length > 0? info = infoLotes[lote].calidadFin[0].fecha.split('T')[0] + ' a las ' + infoLotes[lote].calidadFin[0].fecha.split('T')[1] : info = 'No se ha finalizado el proceso en Control de Calidad' %>
                         <%= info %>
                     </p>
                     <p class="card-text text-center">
-                        <strong>Comentarios del Lote:</strong> <br/> <%= loteInfo[0].comentario %>
+                        <strong>Comentarios del Lote:</strong> <br/> <%= infoLotes[lote].loteInfo.comentario %>
                     </p>
                 </div>
     
             </div>
 
+        <% }); %>
 
     </div>
 

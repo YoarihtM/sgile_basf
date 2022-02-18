@@ -53,7 +53,9 @@ export const queries = {
     getAllBatch: 'SELECT * FROM lote',
     getBatchByCode: 'SELECT * FROM lote WHERE cod_lote = @cod_lote',
     getBatchIdByCode: 'SELECT id FROM lote WHERE cod_lote = @cod_lote',
-    addNewBatch: 'INSERT INTO lote (cod_lote, id_color, cod_sap_color, cliente, descripcion, tecnologia, tam_lote, contenedor, comentario) VALUES (@cod_lote, @id_color, @cod_sap_color, @cliente, @descripcion, @tecnologia, @tam_lote, @contenedor, @comentario)',
+    getAllBatchByBom: 'SELECT * FROM lote WHERE bom = @bom',
+    addNewBatch: 'INSERT INTO lote (cod_lote, id_color, cod_sap_color, bom, cliente, descripcion, tecnologia, tam_lote, contenedor, comentario) VALUES (@cod_lote, @id_color, @cod_sap_color, @bom, @cliente, @descripcion, @tecnologia, @tam_lote, @contenedor, @comentario)',
+    // updtBatchCode: 'UPDATE cod_lote FROM lote WHERE cod_lote = @cod_lote'
 
 // -------------------------------------------------------------------------------------------------------
 
@@ -82,7 +84,7 @@ export const queries = {
     getUserByEmployeeNumber: 'SELECT * FROM usuario WHERE num_empleado = @num_empleado',
     deleteUser: 'DELETE FROM usuario WHERE num_empleado = @num_empleado',
     checkEmail: 'SELECT * FROM usuario WHERE email = @email',
-    // updtUserById: 'UPDATE '
+    // updtUserByEmployeeNumber: 'UPDATE (num_empleado, nombre, ap_paterno, ap_materno, departamento, tipo_usuario, email, contrasena, telefono, img_perfil) FROM usuario WHERE num_empleado = @num_empleado'
 
 // -------------------------------------------------------------------------------------------------------
 

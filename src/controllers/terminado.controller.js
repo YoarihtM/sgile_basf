@@ -48,6 +48,7 @@ export const terminadoInicioRegistrado = async (req, res) => {
         lote,
         idColor,
         sapColor,
+        bom,
         cliente,
         descripcion,
         tecnologia,
@@ -76,6 +77,7 @@ export const terminadoInicioRegistrado = async (req, res) => {
             .input('cod_lote', sql.VarChar(30), lote)
             .input('id_color', sql.Int, idColor)
             .input('cod_sap_color', sql.VarChar(20), sapColor)
+            .input('bom', sql.VarChar(30), bom)
             .input('cliente', sql.VarChar(50), cliente)
             .input('descripcion', sql.VarChar(50), descripcion)
             .input('tecnologia', sql.VarChar(30), tecnologia)
